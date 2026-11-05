@@ -1,0 +1,15 @@
+#virtual environments
+.venv/
+
+#PyCharm generatred
+.idea/
+
+__pycache__/
+*.pyc
+
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+start.sh
+.env

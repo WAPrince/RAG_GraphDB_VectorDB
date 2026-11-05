@@ -24,7 +24,7 @@ async def run_agent(prompt: str) -> None:
 async def main() -> None:
     await run_agent(
         # GraphDB
-        "Was kannst du zu AMD sagen?")
+        "Was kannst du zu AMD sagen? Verwende Daten aus Vektor- und Graphen-Datenbank!")
 
 if __name__ == "__main__":
     asyncio.run(main())

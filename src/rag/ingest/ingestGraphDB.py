@@ -4,8 +4,7 @@ from neo4j import GraphDatabase
 
 URI = "bolt://localhost:7687"
 AUTH = ("neo4j", "password")
-DATA_FILE = Path("/data/input/neo4j_semiconductor_graph.txt")
-
+DATA_FILE = Path("C:/Daten/IT/DEV/Python/RAG_GraphDB_VectorDB/data/input/graphdb_semiconductor.txt")
 
 class Neo4jImporter:
     def __init__(self, uri, user, password):

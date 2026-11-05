@@ -96,7 +96,7 @@ In modernen Enterprise-Architekturen nutzt man meist einen hybriden Ansatz:
 
 SANDBOX
 
-*ingest persons.csv document*
+*ingest persons.csv document inot Neo graph db*
 
 copy from local PC into Docker container :
 
@@ -111,6 +111,10 @@ MERGE (p:Person {name: row.person_name})
 MERGE (c:Company {name: row.company_name, industry: row.company_industry})
 
 MERGE (p)-[:WORKS_AS {role: row.person_role}]->(c)
+
+
+( delete
+MATCH (n) DETACH DELETE n )
 
 *retrieval
 

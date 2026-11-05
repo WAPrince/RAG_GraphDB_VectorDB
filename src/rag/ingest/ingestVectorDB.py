@@ -9,9 +9,10 @@ from retrieval.vectorStore import create_qdrant_client
 
 
 
-DATA_FILE = Path("/data/input/vectordb_source_v2.txt")
+#DATA_FILE = Path("/data/input/vectordb_source_v2.txt")
+DATA_FILE = Path("C:/Daten/IT/DEV/Python/RAG_GraphDB_VectorDB/data/input/vectordb_amd.txt")
 
-def _load_document(file :str ) -> str:
+def _load_document(file :Path ) -> str:
     return file.read_text(
         encoding="utf-8",
     )
@@ -103,7 +104,7 @@ def _ingest(file : str ) -> None:
         print(f"Einlesedauer in Sekunden: {duration.total_seconds()}")
         print(f"End")
     except Exception as e:
-        print(f"Exception ${e.str}")
+        print(f"Exception ${e}")
 
 if __name__ == "__main__":
     _ingest(DATA_FILE)
