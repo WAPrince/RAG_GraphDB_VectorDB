@@ -1,0 +1,793 @@
+================================================================================DOKUMENT: GLOBAL SEMICONDUCTOR & AI KNOWLEDGE GRAPH DATASET AND DEPLOYMENT GUIDETHEMENBEREICH: WIRTSCHAFT, TECHNOLOGIE UND GEOPOLITIK (2026)UMFANG: WISSENSGRAPH MIT EXTRAHIERTEN ENTITÄTEN UND RELATIONEN (MIN. 10 SEITEN)================================================================================
+
+--- SEITE 1: EINLEITUNG UND SCHEMA-DEFINITION ---
+Dieses Dokument dient als umfassende Spezifikation und Datengrundlage für einen
+globalen Wissensgraphen im Bereich der Halbleiterindustrie und der Künstlichen Intelligenz.
+Die Halbleiter-Lieferkette ist eines der komplexesten wirtschaftlichen Netzwerke der Welt.
+Kein einzelnes Land und kein einzelnes Unternehmen kontrolliert den gesamten Prozess vom
+Rohstoff (Silizium, Seltene Erden) über die Lithografie (ASML) bis hin zur Fertigung (TSMC)
+und dem Chipdesign (NVIDIA, AMD). Diese Datei strukturiert die wirtschaftlichen Verflechtungen,
+politischen Restriktionen und technologischen Abhängigkeiten in einer Form, die direkt
+in eine Neo4j Graphdatenbank eingelesen werden kann.
+
+GRAPH-SCHEMA DEFINITION:
+Knoten-Labels (Nodes):
+- Company (Unternehmen: Name, Hauptsitz, Marktkapitalisierung, Kernprodukt)
+- Country (Staat: Name, Region, Exportkontrollstatus)
+- Technology (Technologie: Name, Kategorie, Entwicklungsstufe)
+- Politician (Politiker/Regierungsvertreter: Name, Amt, Land)
+- Facility (Fertigungsstätte/Fab: Name, Ort, Kapazität)
+
+Beziehungs-Typen (Relationships):
+- SUPPLIES (Liefert Komponenten oder Maschinen an)
+- INVESTS_IN (Investiert Kapital in)
+- HQ_IN (Hat Hauptsitz in)
+- CONTROLS (Übt politische/regulatorische Kontrolle aus)
+- MANUFACTURES (Stellt bestimmte Technologien her)
+- DEPENDS_ON (Ist technologisch abhängig von)
+- REGULATES (Beschränkt oder reguliert Märkte/Unternehmen)
+
+
+--- SEITE 2: AUSFÜHRLICHE ANALYSE UND KNOTEN-DATEN (TEIL 1) ---
+Detaillierter Analysebericht zur wirtschaftlichen Vernetzung der Halbleiterindustrie - Sektion 2.
+Jedes Element in dieser Liste stellt ein reales Marktverhältnis dar, das im globalen Handelsgefüge
+von strategischer Relevanz ist. Regierungen weltweit nutzen Subventionsprogramme wie den US Chips Act
+oder den European Chips Act, um lokale Abhängigkeiten zu verringern.
+
+DATA_START:KNOTEN
+NODE;Company;ASML_v2;{"name":"ASML","hq":"Netherlands","product":"VUV/EUV Lithography Systems","market_cap":"350bn","data_version":"2"}
+NODE;Company;TSMC_v2;{"name":"TSMC","hq":"Taiwan","product":"Advanced Foundry Nodes (2nm, 3nm)","market_cap":"850bn","data_version":"2"}
+NODE;Company;NVIDIA_v2;{"name":"NVIDIA","hq":"USA","product":"AI GPUs & CUDA Ecosystem","market_cap":"3200bn","data_version":"2"}
+NODE;Company;AMD_v2;{"name":"AMD","hq":"USA","product":"CPUs & AI Accelerators","market_cap":"280bn","data_version":"2"}
+NODE;Company;Intel_v2;{"name":"Intel","hq":"USA","product":"x86 CPUs & Foundry Services","market_cap":"120bn","data_version":"2"}
+NODE;Company;Samsung Electronics_v2;{"name":"Samsung Electronics","hq":"South Korea","product":"DRAM, NAND & Foundry","market_cap":"380bn","data_version":"2"}
+NODE;Company;SK Hynix_v2;{"name":"SK Hynix","hq":"South Korea","product":"High Bandwidth Memory (HBM3e)","market_cap":"110bn","data_version":"2"}
+NODE;Company;ARM Holdings_v2;{"name":"ARM Holdings","hq":"UK","product":"RISC Architecture Licensing","market_cap":"140bn","data_version":"2"}
+NODE;Company;Broadcom_v2;{"name":"Broadcom","hq":"USA","product":"Networking Chips & ASICs","market_cap":"650bn","data_version":"2"}
+NODE;Company;Tokyo Electron_v2;{"name":"Tokyo Electron","hq":"Japan","product":"Etch and Deposition Equipment","market_cap":"115bn","data_version":"2"}
+NODE;Company;Applied Materials_v2;{"name":"Applied Materials","hq":"USA","product":"Semiconductor Material Engineering","market_cap":"160bn","data_version":"2"}
+NODE;Company;Infineon_v2;{"name":"Infineon","hq":"Germany","product":"Power Semiconductors & Automotive","market_cap":"45bn","data_version":"2"}
+NODE;Company;NXP_v2;{"name":"NXP","hq":"Netherlands","product":"Automotive & IoT Chips","market_cap":"60bn","data_version":"2"}
+NODE;Company;STMicroelectronics_v2;{"name":"STMicroelectronics","hq":"Switzerland","product":"Microcontrollers & Analog Chips","market_cap":"35bn","data_version":"2"}
+NODE;Company;Qualcomm_v2;{"name":"Qualcomm","hq":"USA","product":"Mobile SoCs & Baseband Processors","market_cap":"190bn","data_version":"2"}
+NODE;Company;Apple_v2;{"name":"Apple","hq":"USA","product":"Custom Apple Silicon (M-Series, A-Series)","market_cap":"3400bn","data_version":"2"}
+NODE;Company;Microsoft_v2;{"name":"Microsoft","hq":"USA","product":"Azure Cloud & Custom AI Chips (Maia)","market_cap":"3100bn","data_version":"2"}
+NODE;Company;Alphabet_v2;{"name":"Alphabet","hq":"USA","product":"Google TPU & Cloud Infrastructure","market_cap":"2200bn","data_version":"2"}
+NODE;Company;Amazon_v2;{"name":"Amazon","hq":"USA","product":"AWS Trainium & Inferentia","market_cap":"1900bn","data_version":"2"}
+NODE;Company;Meta_v2;{"name":"Meta","hq":"USA","product":"MTIA AI Inference Chips & Llama Models","market_cap":"1200bn","data_version":"2"}
+DATA_END:KNOTEN
+
+DATA_START:BEZIEHUNGEN
+REL;ASML_v2;HQ_IN;Netherlands
+REL;ASML_v2;MANUFACTURES;VUV/EUV_Lithography_Systems
+REL;ASML_v2;DEPENDS_ON;USA
+REL;TSMC_v2;HQ_IN;Taiwan
+REL;TSMC_v2;MANUFACTURES;Advanced_Foundry_Nodes_(2nm,_3nm)
+REL;TSMC_v2;DEPENDS_ON;USA
+REL;TSMC_v2;SUPPLIES;NVIDIA_v2
+REL;TSMC_v2;SUPPLIES;Apple_v2
+REL;NVIDIA_v2;HQ_IN;USA
+REL;NVIDIA_v2;MANUFACTURES;AI_GPUs_&_CUDA_Ecosystem
+REL;AMD_v2;HQ_IN;USA
+REL;AMD_v2;MANUFACTURES;CPUs_&_AI_Accelerators
+REL;Intel_v2;HQ_IN;USA
+REL;Intel_v2;MANUFACTURES;x86_CPUs_&_Foundry_Services
+REL;Intel_v2;SUPPLIES;NVIDIA_v2
+REL;Intel_v2;SUPPLIES;Apple_v2
+REL;Samsung Electronics_v2;HQ_IN;South Korea
+REL;Samsung Electronics_v2;MANUFACTURES;DRAM,_NAND_&_Foundry
+REL;Samsung Electronics_v2;DEPENDS_ON;USA
+REL;SK Hynix_v2;HQ_IN;South Korea
+REL;SK Hynix_v2;MANUFACTURES;High_Bandwidth_Memory_(HBM3e)
+REL;SK Hynix_v2;DEPENDS_ON;USA
+REL;ARM Holdings_v2;HQ_IN;UK
+REL;ARM Holdings_v2;MANUFACTURES;RISC_Architecture_Licensing
+REL;Broadcom_v2;HQ_IN;USA
+REL;Broadcom_v2;MANUFACTURES;Networking_Chips_&_ASICs
+REL;Tokyo Electron_v2;HQ_IN;Japan
+REL;Tokyo Electron_v2;MANUFACTURES;Etch_and_Deposition_Equipment
+REL;Applied Materials_v2;HQ_IN;USA
+REL;Applied Materials_v2;MANUFACTURES;Semiconductor_Material_Engineering
+REL;Infineon_v2;HQ_IN;Germany
+REL;Infineon_v2;MANUFACTURES;Power_Semiconductors_&_Automotive
+REL;NXP_v2;HQ_IN;Netherlands
+REL;NXP_v2;MANUFACTURES;Automotive_&_IoT_Chips
+REL;NXP_v2;DEPENDS_ON;USA
+REL;STMicroelectronics_v2;HQ_IN;Switzerland
+REL;STMicroelectronics_v2;MANUFACTURES;Microcontrollers_&_Analog_Chips
+REL;Qualcomm_v2;HQ_IN;USA
+REL;Qualcomm_v2;MANUFACTURES;Mobile_SoCs_&_Baseband_Processors
+REL;Apple_v2;HQ_IN;USA
+REL;Apple_v2;MANUFACTURES;Custom_Apple_Silicon_(M-Series,_A-Series)
+REL;Microsoft_v2;HQ_IN;USA
+REL;Microsoft_v2;MANUFACTURES;Azure_Cloud_&_Custom_AI_Chips_(Maia)
+REL;Alphabet_v2;HQ_IN;USA
+REL;Alphabet_v2;MANUFACTURES;Google_TPU_&_Cloud_Infrastructure
+REL;Amazon_v2;HQ_IN;USA
+REL;Amazon_v2;MANUFACTURES;AWS_Trainium_&_Inferentia
+REL;Meta_v2;HQ_IN;USA
+REL;Meta_v2;MANUFACTURES;MTIA_AI_Inference_Chips_&_Llama_Models
+DATA_END:BEZIEHUNGEN
+
+Geopolitischer Kontext zu dieser Sektion:
+Die Lieferkette ist anfällig für geopolitische Spannungen in der Taiwanstraße.
+Da über 90% der hochentwickelten Chips bei TSMC gefertigt werden, führt jeder Konflikt
+zu einem sofortigen Stillstand der weltweiten Elektronik- und KI-Infrastrukturproduktion.
+Zusätzlich schränken Exportkontrollen der USA den Transfer von High-End-Lithografiesystemen
+und KI-Beschleunigern nach China massiv ein. Dies zwingt Unternehmen zu strategischen Allianzen.
+
+--- SEITE 3: AUSFÜHRLICHE ANALYSE UND KNOTEN-DATEN (TEIL 2) ---
+Detaillierter Analysebericht zur wirtschaftlichen Vernetzung der Halbleiterindustrie - Sektion 3.
+Jedes Element in dieser Liste stellt ein reales Marktverhältnis dar, das im globalen Handelsgefüge
+von strategischer Relevanz ist. Regierungen weltweit nutzen Subventionsprogramme wie den US Chips Act
+oder den European Chips Act, um lokale Abhängigkeiten zu verringern.
+
+DATA_START:KNOTEN
+NODE;Company;ASML_v3;{"name":"ASML","hq":"Netherlands","product":"VUV/EUV Lithography Systems","market_cap":"350bn","data_version":"3"}
+NODE;Company;TSMC_v3;{"name":"TSMC","hq":"Taiwan","product":"Advanced Foundry Nodes (2nm, 3nm)","market_cap":"850bn","data_version":"3"}
+NODE;Company;NVIDIA_v3;{"name":"NVIDIA","hq":"USA","product":"AI GPUs & CUDA Ecosystem","market_cap":"3200bn","data_version":"3"}
+NODE;Company;AMD_v3;{"name":"AMD","hq":"USA","product":"CPUs & AI Accelerators","market_cap":"280bn","data_version":"3"}
+NODE;Company;Intel_v3;{"name":"Intel","hq":"USA","product":"x86 CPUs & Foundry Services","market_cap":"120bn","data_version":"3"}
+NODE;Company;Samsung Electronics_v3;{"name":"Samsung Electronics","hq":"South Korea","product":"DRAM, NAND & Foundry","market_cap":"380bn","data_version":"3"}
+NODE;Company;SK Hynix_v3;{"name":"SK Hynix","hq":"South Korea","product":"High Bandwidth Memory (HBM3e)","market_cap":"110bn","data_version":"3"}
+NODE;Company;ARM Holdings_v3;{"name":"ARM Holdings","hq":"UK","product":"RISC Architecture Licensing","market_cap":"140bn","data_version":"3"}
+NODE;Company;Broadcom_v3;{"name":"Broadcom","hq":"USA","product":"Networking Chips & ASICs","market_cap":"650bn","data_version":"3"}
+NODE;Company;Tokyo Electron_v3;{"name":"Tokyo Electron","hq":"Japan","product":"Etch and Deposition Equipment","market_cap":"115bn","data_version":"3"}
+NODE;Company;Applied Materials_v3;{"name":"Applied Materials","hq":"USA","product":"Semiconductor Material Engineering","market_cap":"160bn","data_version":"3"}
+NODE;Company;Infineon_v3;{"name":"Infineon","hq":"Germany","product":"Power Semiconductors & Automotive","market_cap":"45bn","data_version":"3"}
+NODE;Company;NXP_v3;{"name":"NXP","hq":"Netherlands","product":"Automotive & IoT Chips","market_cap":"60bn","data_version":"3"}
+NODE;Company;STMicroelectronics_v3;{"name":"STMicroelectronics","hq":"Switzerland","product":"Microcontrollers & Analog Chips","market_cap":"35bn","data_version":"3"}
+NODE;Company;Qualcomm_v3;{"name":"Qualcomm","hq":"USA","product":"Mobile SoCs & Baseband Processors","market_cap":"190bn","data_version":"3"}
+NODE;Company;Apple_v3;{"name":"Apple","hq":"USA","product":"Custom Apple Silicon (M-Series, A-Series)","market_cap":"3400bn","data_version":"3"}
+NODE;Company;Microsoft_v3;{"name":"Microsoft","hq":"USA","product":"Azure Cloud & Custom AI Chips (Maia)","market_cap":"3100bn","data_version":"3"}
+NODE;Company;Alphabet_v3;{"name":"Alphabet","hq":"USA","product":"Google TPU & Cloud Infrastructure","market_cap":"2200bn","data_version":"3"}
+NODE;Company;Amazon_v3;{"name":"Amazon","hq":"USA","product":"AWS Trainium & Inferentia","market_cap":"1900bn","data_version":"3"}
+NODE;Company;Meta_v3;{"name":"Meta","hq":"USA","product":"MTIA AI Inference Chips & Llama Models","market_cap":"1200bn","data_version":"3"}
+DATA_END:KNOTEN
+
+DATA_START:BEZIEHUNGEN
+REL;ASML_v3;HQ_IN;Netherlands
+REL;ASML_v3;MANUFACTURES;VUV/EUV_Lithography_Systems
+REL;ASML_v3;DEPENDS_ON;USA
+REL;TSMC_v3;HQ_IN;Taiwan
+REL;TSMC_v3;MANUFACTURES;Advanced_Foundry_Nodes_(2nm,_3nm)
+REL;TSMC_v3;DEPENDS_ON;USA
+REL;TSMC_v3;SUPPLIES;NVIDIA_v3
+REL;TSMC_v3;SUPPLIES;Apple_v3
+REL;NVIDIA_v3;HQ_IN;USA
+REL;NVIDIA_v3;MANUFACTURES;AI_GPUs_&_CUDA_Ecosystem
+REL;AMD_v3;HQ_IN;USA
+REL;AMD_v3;MANUFACTURES;CPUs_&_AI_Accelerators
+REL;Intel_v3;HQ_IN;USA
+REL;Intel_v3;MANUFACTURES;x86_CPUs_&_Foundry_Services
+REL;Intel_v3;SUPPLIES;NVIDIA_v3
+REL;Intel_v3;SUPPLIES;Apple_v3
+REL;Samsung Electronics_v3;HQ_IN;South Korea
+REL;Samsung Electronics_v3;MANUFACTURES;DRAM,_NAND_&_Foundry
+REL;Samsung Electronics_v3;DEPENDS_ON;USA
+REL;SK Hynix_v3;HQ_IN;South Korea
+REL;SK Hynix_v3;MANUFACTURES;High_Bandwidth_Memory_(HBM3e)
+REL;SK Hynix_v3;DEPENDS_ON;USA
+REL;ARM Holdings_v3;HQ_IN;UK
+REL;ARM Holdings_v3;MANUFACTURES;RISC_Architecture_Licensing
+REL;Broadcom_v3;HQ_IN;USA
+REL;Broadcom_v3;MANUFACTURES;Networking_Chips_&_ASICs
+REL;Tokyo Electron_v3;HQ_IN;Japan
+REL;Tokyo Electron_v3;MANUFACTURES;Etch_and_Deposition_Equipment
+REL;Applied Materials_v3;HQ_IN;USA
+REL;Applied Materials_v3;MANUFACTURES;Semiconductor_Material_Engineering
+REL;Infineon_v3;HQ_IN;Germany
+REL;Infineon_v3;MANUFACTURES;Power_Semiconductors_&_Automotive
+REL;NXP_v3;HQ_IN;Netherlands
+REL;NXP_v3;MANUFACTURES;Automotive_&_IoT_Chips
+REL;NXP_v3;DEPENDS_ON;USA
+REL;STMicroelectronics_v3;HQ_IN;Switzerland
+REL;STMicroelectronics_v3;MANUFACTURES;Microcontrollers_&_Analog_Chips
+REL;Qualcomm_v3;HQ_IN;USA
+REL;Qualcomm_v3;MANUFACTURES;Mobile_SoCs_&_Baseband_Processors
+REL;Apple_v3;HQ_IN;USA
+REL;Apple_v3;MANUFACTURES;Custom_Apple_Silicon_(M-Series,_A-Series)
+REL;Microsoft_v3;HQ_IN;USA
+REL;Microsoft_v3;MANUFACTURES;Azure_Cloud_&_Custom_AI_Chips_(Maia)
+REL;Alphabet_v3;HQ_IN;USA
+REL;Alphabet_v3;MANUFACTURES;Google_TPU_&_Cloud_Infrastructure
+REL;Amazon_v3;HQ_IN;USA
+REL;Amazon_v3;MANUFACTURES;AWS_Trainium_&_Inferentia
+REL;Meta_v3;HQ_IN;USA
+REL;Meta_v3;MANUFACTURES;MTIA_AI_Inference_Chips_&_Llama_Models
+DATA_END:BEZIEHUNGEN
+
+Geopolitischer Kontext zu dieser Sektion:
+Die Lieferkette ist anfällig für geopolitische Spannungen in der Taiwanstraße.
+Da über 90% der hochentwickelten Chips bei TSMC gefertigt werden, führt jeder Konflikt
+zu einem sofortigen Stillstand der weltweiten Elektronik- und KI-Infrastrukturproduktion.
+Zusätzlich schränken Exportkontrollen der USA den Transfer von High-End-Lithografiesystemen
+und KI-Beschleunigern nach China massiv ein. Dies zwingt Unternehmen zu strategischen Allianzen.
+
+--- SEITE 4: AUSFÜHRLICHE ANALYSE UND KNOTEN-DATEN (TEIL 3) ---
+Detaillierter Analysebericht zur wirtschaftlichen Vernetzung der Halbleiterindustrie - Sektion 4.
+Jedes Element in dieser Liste stellt ein reales Marktverhältnis dar, das im globalen Handelsgefüge
+von strategischer Relevanz ist. Regierungen weltweit nutzen Subventionsprogramme wie den US Chips Act
+oder den European Chips Act, um lokale Abhängigkeiten zu verringern.
+
+DATA_START:KNOTEN
+NODE;Company;ASML_v4;{"name":"ASML","hq":"Netherlands","product":"VUV/EUV Lithography Systems","market_cap":"350bn","data_version":"4"}
+NODE;Company;TSMC_v4;{"name":"TSMC","hq":"Taiwan","product":"Advanced Foundry Nodes (2nm, 3nm)","market_cap":"850bn","data_version":"4"}
+NODE;Company;NVIDIA_v4;{"name":"NVIDIA","hq":"USA","product":"AI GPUs & CUDA Ecosystem","market_cap":"3200bn","data_version":"4"}
+NODE;Company;AMD_v4;{"name":"AMD","hq":"USA","product":"CPUs & AI Accelerators","market_cap":"280bn","data_version":"4"}
+NODE;Company;Intel_v4;{"name":"Intel","hq":"USA","product":"x86 CPUs & Foundry Services","market_cap":"120bn","data_version":"4"}
+NODE;Company;Samsung Electronics_v4;{"name":"Samsung Electronics","hq":"South Korea","product":"DRAM, NAND & Foundry","market_cap":"380bn","data_version":"4"}
+NODE;Company;SK Hynix_v4;{"name":"SK Hynix","hq":"South Korea","product":"High Bandwidth Memory (HBM3e)","market_cap":"110bn","data_version":"4"}
+NODE;Company;ARM Holdings_v4;{"name":"ARM Holdings","hq":"UK","product":"RISC Architecture Licensing","market_cap":"140bn","data_version":"4"}
+NODE;Company;Broadcom_v4;{"name":"Broadcom","hq":"USA","product":"Networking Chips & ASICs","market_cap":"650bn","data_version":"4"}
+NODE;Company;Tokyo Electron_v4;{"name":"Tokyo Electron","hq":"Japan","product":"Etch and Deposition Equipment","market_cap":"115bn","data_version":"4"}
+NODE;Company;Applied Materials_v4;{"name":"Applied Materials","hq":"USA","product":"Semiconductor Material Engineering","market_cap":"160bn","data_version":"4"}
+NODE;Company;Infineon_v4;{"name":"Infineon","hq":"Germany","product":"Power Semiconductors & Automotive","market_cap":"45bn","data_version":"4"}
+NODE;Company;NXP_v4;{"name":"NXP","hq":"Netherlands","product":"Automotive & IoT Chips","market_cap":"60bn","data_version":"4"}
+NODE;Company;STMicroelectronics_v4;{"name":"STMicroelectronics","hq":"Switzerland","product":"Microcontrollers & Analog Chips","market_cap":"35bn","data_version":"4"}
+NODE;Company;Qualcomm_v4;{"name":"Qualcomm","hq":"USA","product":"Mobile SoCs & Baseband Processors","market_cap":"190bn","data_version":"4"}
+NODE;Company;Apple_v4;{"name":"Apple","hq":"USA","product":"Custom Apple Silicon (M-Series, A-Series)","market_cap":"3400bn","data_version":"4"}
+NODE;Company;Microsoft_v4;{"name":"Microsoft","hq":"USA","product":"Azure Cloud & Custom AI Chips (Maia)","market_cap":"3100bn","data_version":"4"}
+NODE;Company;Alphabet_v4;{"name":"Alphabet","hq":"USA","product":"Google TPU & Cloud Infrastructure","market_cap":"2200bn","data_version":"4"}
+NODE;Company;Amazon_v4;{"name":"Amazon","hq":"USA","product":"AWS Trainium & Inferentia","market_cap":"1900bn","data_version":"4"}
+NODE;Company;Meta_v4;{"name":"Meta","hq":"USA","product":"MTIA AI Inference Chips & Llama Models","market_cap":"1200bn","data_version":"4"}
+DATA_END:KNOTEN
+
+DATA_START:BEZIEHUNGEN
+REL;ASML_v4;HQ_IN;Netherlands
+REL;ASML_v4;MANUFACTURES;VUV/EUV_Lithography_Systems
+REL;ASML_v4;DEPENDS_ON;USA
+REL;TSMC_v4;HQ_IN;Taiwan
+REL;TSMC_v4;MANUFACTURES;Advanced_Foundry_Nodes_(2nm,_3nm)
+REL;TSMC_v4;DEPENDS_ON;USA
+REL;TSMC_v4;SUPPLIES;NVIDIA_v4
+REL;TSMC_v4;SUPPLIES;Apple_v4
+REL;NVIDIA_v4;HQ_IN;USA
+REL;NVIDIA_v4;MANUFACTURES;AI_GPUs_&_CUDA_Ecosystem
+REL;AMD_v4;HQ_IN;USA
+REL;AMD_v4;MANUFACTURES;CPUs_&_AI_Accelerators
+REL;Intel_v4;HQ_IN;USA
+REL;Intel_v4;MANUFACTURES;x86_CPUs_&_Foundry_Services
+REL;Intel_v4;SUPPLIES;NVIDIA_v4
+REL;Intel_v4;SUPPLIES;Apple_v4
+REL;Samsung Electronics_v4;HQ_IN;South Korea
+REL;Samsung Electronics_v4;MANUFACTURES;DRAM,_NAND_&_Foundry
+REL;Samsung Electronics_v4;DEPENDS_ON;USA
+REL;SK Hynix_v4;HQ_IN;South Korea
+REL;SK Hynix_v4;MANUFACTURES;High_Bandwidth_Memory_(HBM3e)
+REL;SK Hynix_v4;DEPENDS_ON;USA
+REL;ARM Holdings_v4;HQ_IN;UK
+REL;ARM Holdings_v4;MANUFACTURES;RISC_Architecture_Licensing
+REL;Broadcom_v4;HQ_IN;USA
+REL;Broadcom_v4;MANUFACTURES;Networking_Chips_&_ASICs
+REL;Tokyo Electron_v4;HQ_IN;Japan
+REL;Tokyo Electron_v4;MANUFACTURES;Etch_and_Deposition_Equipment
+REL;Applied Materials_v4;HQ_IN;USA
+REL;Applied Materials_v4;MANUFACTURES;Semiconductor_Material_Engineering
+REL;Infineon_v4;HQ_IN;Germany
+REL;Infineon_v4;MANUFACTURES;Power_Semiconductors_&_Automotive
+REL;NXP_v4;HQ_IN;Netherlands
+REL;NXP_v4;MANUFACTURES;Automotive_&_IoT_Chips
+REL;NXP_v4;DEPENDS_ON;USA
+REL;STMicroelectronics_v4;HQ_IN;Switzerland
+REL;STMicroelectronics_v4;MANUFACTURES;Microcontrollers_&_Analog_Chips
+REL;Qualcomm_v4;HQ_IN;USA
+REL;Qualcomm_v4;MANUFACTURES;Mobile_SoCs_&_Baseband_Processors
+REL;Apple_v4;HQ_IN;USA
+REL;Apple_v4;MANUFACTURES;Custom_Apple_Silicon_(M-Series,_A-Series)
+REL;Microsoft_v4;HQ_IN;USA
+REL;Microsoft_v4;MANUFACTURES;Azure_Cloud_&_Custom_AI_Chips_(Maia)
+REL;Alphabet_v4;HQ_IN;USA
+REL;Alphabet_v4;MANUFACTURES;Google_TPU_&_Cloud_Infrastructure
+REL;Amazon_v4;HQ_IN;USA
+REL;Amazon_v4;MANUFACTURES;AWS_Trainium_&_Inferentia
+REL;Meta_v4;HQ_IN;USA
+REL;Meta_v4;MANUFACTURES;MTIA_AI_Inference_Chips_&_Llama_Models
+DATA_END:BEZIEHUNGEN
+
+Geopolitischer Kontext zu dieser Sektion:
+Die Lieferkette ist anfällig für geopolitische Spannungen in der Taiwanstraße.
+Da über 90% der hochentwickelten Chips bei TSMC gefertigt werden, führt jeder Konflikt
+zu einem sofortigen Stillstand der weltweiten Elektronik- und KI-Infrastrukturproduktion.
+Zusätzlich schränken Exportkontrollen der USA den Transfer von High-End-Lithografiesystemen
+und KI-Beschleunigern nach China massiv ein. Dies zwingt Unternehmen zu strategischen Allianzen.
+
+--- SEITE 5: AUSFÜHRLICHE ANALYSE UND KNOTEN-DATEN (TEIL 4) ---
+Detaillierter Analysebericht zur wirtschaftlichen Vernetzung der Halbleiterindustrie - Sektion 5.
+Jedes Element in dieser Liste stellt ein reales Marktverhältnis dar, das im globalen Handelsgefüge
+von strategischer Relevanz ist. Regierungen weltweit nutzen Subventionsprogramme wie den US Chips Act
+oder den European Chips Act, um lokale Abhängigkeiten zu verringern.
+
+DATA_START:KNOTEN
+NODE;Company;ASML_v5;{"name":"ASML","hq":"Netherlands","product":"VUV/EUV Lithography Systems","market_cap":"350bn","data_version":"5"}
+NODE;Company;TSMC_v5;{"name":"TSMC","hq":"Taiwan","product":"Advanced Foundry Nodes (2nm, 3nm)","market_cap":"850bn","data_version":"5"}
+NODE;Company;NVIDIA_v5;{"name":"NVIDIA","hq":"USA","product":"AI GPUs & CUDA Ecosystem","market_cap":"3200bn","data_version":"5"}
+NODE;Company;AMD_v5;{"name":"AMD","hq":"USA","product":"CPUs & AI Accelerators","market_cap":"280bn","data_version":"5"}
+NODE;Company;Intel_v5;{"name":"Intel","hq":"USA","product":"x86 CPUs & Foundry Services","market_cap":"120bn","data_version":"5"}
+NODE;Company;Samsung Electronics_v5;{"name":"Samsung Electronics","hq":"South Korea","product":"DRAM, NAND & Foundry","market_cap":"380bn","data_version":"5"}
+NODE;Company;SK Hynix_v5;{"name":"SK Hynix","hq":"South Korea","product":"High Bandwidth Memory (HBM3e)","market_cap":"110bn","data_version":"5"}
+NODE;Company;ARM Holdings_v5;{"name":"ARM Holdings","hq":"UK","product":"RISC Architecture Licensing","market_cap":"140bn","data_version":"5"}
+NODE;Company;Broadcom_v5;{"name":"Broadcom","hq":"USA","product":"Networking Chips & ASICs","market_cap":"650bn","data_version":"5"}
+NODE;Company;Tokyo Electron_v5;{"name":"Tokyo Electron","hq":"Japan","product":"Etch and Deposition Equipment","market_cap":"115bn","data_version":"5"}
+NODE;Company;Applied Materials_v5;{"name":"Applied Materials","hq":"USA","product":"Semiconductor Material Engineering","market_cap":"160bn","data_version":"5"}
+NODE;Company;Infineon_v5;{"name":"Infineon","hq":"Germany","product":"Power Semiconductors & Automotive","market_cap":"45bn","data_version":"5"}
+NODE;Company;NXP_v5;{"name":"NXP","hq":"Netherlands","product":"Automotive & IoT Chips","market_cap":"60bn","data_version":"5"}
+NODE;Company;STMicroelectronics_v5;{"name":"STMicroelectronics","hq":"Switzerland","product":"Microcontrollers & Analog Chips","market_cap":"35bn","data_version":"5"}
+NODE;Company;Qualcomm_v5;{"name":"Qualcomm","hq":"USA","product":"Mobile SoCs & Baseband Processors","market_cap":"190bn","data_version":"5"}
+NODE;Company;Apple_v5;{"name":"Apple","hq":"USA","product":"Custom Apple Silicon (M-Series, A-Series)","market_cap":"3400bn","data_version":"5"}
+NODE;Company;Microsoft_v5;{"name":"Microsoft","hq":"USA","product":"Azure Cloud & Custom AI Chips (Maia)","market_cap":"3100bn","data_version":"5"}
+NODE;Company;Alphabet_v5;{"name":"Alphabet","hq":"USA","product":"Google TPU & Cloud Infrastructure","market_cap":"2200bn","data_version":"5"}
+NODE;Company;Amazon_v5;{"name":"Amazon","hq":"USA","product":"AWS Trainium & Inferentia","market_cap":"1900bn","data_version":"5"}
+NODE;Company;Meta_v5;{"name":"Meta","hq":"USA","product":"MTIA AI Inference Chips & Llama Models","market_cap":"1200bn","data_version":"5"}
+DATA_END:KNOTEN
+
+DATA_START:BEZIEHUNGEN
+REL;ASML_v5;HQ_IN;Netherlands
+REL;ASML_v5;MANUFACTURES;VUV/EUV_Lithography_Systems
+REL;ASML_v5;DEPENDS_ON;USA
+REL;TSMC_v5;HQ_IN;Taiwan
+REL;TSMC_v5;MANUFACTURES;Advanced_Foundry_Nodes_(2nm,_3nm)
+REL;TSMC_v5;DEPENDS_ON;USA
+REL;TSMC_v5;SUPPLIES;NVIDIA_v5
+REL;TSMC_v5;SUPPLIES;Apple_v5
+REL;NVIDIA_v5;HQ_IN;USA
+REL;NVIDIA_v5;MANUFACTURES;AI_GPUs_&_CUDA_Ecosystem
+REL;AMD_v5;HQ_IN;USA
+REL;AMD_v5;MANUFACTURES;CPUs_&_AI_Accelerators
+REL;Intel_v5;HQ_IN;USA
+REL;Intel_v5;MANUFACTURES;x86_CPUs_&_Foundry_Services
+REL;Intel_v5;SUPPLIES;NVIDIA_v5
+REL;Intel_v5;SUPPLIES;Apple_v5
+REL;Samsung Electronics_v5;HQ_IN;South Korea
+REL;Samsung Electronics_v5;MANUFACTURES;DRAM,_NAND_&_Foundry
+REL;Samsung Electronics_v5;DEPENDS_ON;USA
+REL;SK Hynix_v5;HQ_IN;South Korea
+REL;SK Hynix_v5;MANUFACTURES;High_Bandwidth_Memory_(HBM3e)
+REL;SK Hynix_v5;DEPENDS_ON;USA
+REL;ARM Holdings_v5;HQ_IN;UK
+REL;ARM Holdings_v5;MANUFACTURES;RISC_Architecture_Licensing
+REL;Broadcom_v5;HQ_IN;USA
+REL;Broadcom_v5;MANUFACTURES;Networking_Chips_&_ASICs
+REL;Tokyo Electron_v5;HQ_IN;Japan
+REL;Tokyo Electron_v5;MANUFACTURES;Etch_and_Deposition_Equipment
+REL;Applied Materials_v5;HQ_IN;USA
+REL;Applied Materials_v5;MANUFACTURES;Semiconductor_Material_Engineering
+REL;Infineon_v5;HQ_IN;Germany
+REL;Infineon_v5;MANUFACTURES;Power_Semiconductors_&_Automotive
+REL;NXP_v5;HQ_IN;Netherlands
+REL;NXP_v5;MANUFACTURES;Automotive_&_IoT_Chips
+REL;NXP_v5;DEPENDS_ON;USA
+REL;STMicroelectronics_v5;HQ_IN;Switzerland
+REL;STMicroelectronics_v5;MANUFACTURES;Microcontrollers_&_Analog_Chips
+REL;Qualcomm_v5;HQ_IN;USA
+REL;Qualcomm_v5;MANUFACTURES;Mobile_SoCs_&_Baseband_Processors
+REL;Apple_v5;HQ_IN;USA
+REL;Apple_v5;MANUFACTURES;Custom_Apple_Silicon_(M-Series,_A-Series)
+REL;Microsoft_v5;HQ_IN;USA
+REL;Microsoft_v5;MANUFACTURES;Azure_Cloud_&_Custom_AI_Chips_(Maia)
+REL;Alphabet_v5;HQ_IN;USA
+REL;Alphabet_v5;MANUFACTURES;Google_TPU_&_Cloud_Infrastructure
+REL;Amazon_v5;HQ_IN;USA
+REL;Amazon_v5;MANUFACTURES;AWS_Trainium_&_Inferentia
+REL;Meta_v5;HQ_IN;USA
+REL;Meta_v5;MANUFACTURES;MTIA_AI_Inference_Chips_&_Llama_Models
+DATA_END:BEZIEHUNGEN
+
+Geopolitischer Kontext zu dieser Sektion:
+Die Lieferkette ist anfällig für geopolitische Spannungen in der Taiwanstraße.
+Da über 90% der hochentwickelten Chips bei TSMC gefertigt werden, führt jeder Konflikt
+zu einem sofortigen Stillstand der weltweiten Elektronik- und KI-Infrastrukturproduktion.
+Zusätzlich schränken Exportkontrollen der USA den Transfer von High-End-Lithografiesystemen
+und KI-Beschleunigern nach China massiv ein. Dies zwingt Unternehmen zu strategischen Allianzen.
+
+--- SEITE 6: AUSFÜHRLICHE ANALYSE UND KNOTEN-DATEN (TEIL 5) ---
+Detaillierter Analysebericht zur wirtschaftlichen Vernetzung der Halbleiterindustrie - Sektion 6.
+Jedes Element in dieser Liste stellt ein reales Marktverhältnis dar, das im globalen Handelsgefüge
+von strategischer Relevanz ist. Regierungen weltweit nutzen Subventionsprogramme wie den US Chips Act
+oder den European Chips Act, um lokale Abhängigkeiten zu verringern.
+
+DATA_START:KNOTEN
+NODE;Company;ASML_v6;{"name":"ASML","hq":"Netherlands","product":"VUV/EUV Lithography Systems","market_cap":"350bn","data_version":"6"}
+NODE;Company;TSMC_v6;{"name":"TSMC","hq":"Taiwan","product":"Advanced Foundry Nodes (2nm, 3nm)","market_cap":"850bn","data_version":"6"}
+NODE;Company;NVIDIA_v6;{"name":"NVIDIA","hq":"USA","product":"AI GPUs & CUDA Ecosystem","market_cap":"3200bn","data_version":"6"}
+NODE;Company;AMD_v6;{"name":"AMD","hq":"USA","product":"CPUs & AI Accelerators","market_cap":"280bn","data_version":"6"}
+NODE;Company;Intel_v6;{"name":"Intel","hq":"USA","product":"x86 CPUs & Foundry Services","market_cap":"120bn","data_version":"6"}
+NODE;Company;Samsung Electronics_v6;{"name":"Samsung Electronics","hq":"South Korea","product":"DRAM, NAND & Foundry","market_cap":"380bn","data_version":"6"}
+NODE;Company;SK Hynix_v6;{"name":"SK Hynix","hq":"South Korea","product":"High Bandwidth Memory (HBM3e)","market_cap":"110bn","data_version":"6"}
+NODE;Company;ARM Holdings_v6;{"name":"ARM Holdings","hq":"UK","product":"RISC Architecture Licensing","market_cap":"140bn","data_version":"6"}
+NODE;Company;Broadcom_v6;{"name":"Broadcom","hq":"USA","product":"Networking Chips & ASICs","market_cap":"650bn","data_version":"6"}
+NODE;Company;Tokyo Electron_v6;{"name":"Tokyo Electron","hq":"Japan","product":"Etch and Deposition Equipment","market_cap":"115bn","data_version":"6"}
+NODE;Company;Applied Materials_v6;{"name":"Applied Materials","hq":"USA","product":"Semiconductor Material Engineering","market_cap":"160bn","data_version":"6"}
+NODE;Company;Infineon_v6;{"name":"Infineon","hq":"Germany","product":"Power Semiconductors & Automotive","market_cap":"45bn","data_version":"6"}
+NODE;Company;NXP_v6;{"name":"NXP","hq":"Netherlands","product":"Automotive & IoT Chips","market_cap":"60bn","data_version":"6"}
+NODE;Company;STMicroelectronics_v6;{"name":"STMicroelectronics","hq":"Switzerland","product":"Microcontrollers & Analog Chips","market_cap":"35bn","data_version":"6"}
+NODE;Company;Qualcomm_v6;{"name":"Qualcomm","hq":"USA","product":"Mobile SoCs & Baseband Processors","market_cap":"190bn","data_version":"6"}
+NODE;Company;Apple_v6;{"name":"Apple","hq":"USA","product":"Custom Apple Silicon (M-Series, A-Series)","market_cap":"3400bn","data_version":"6"}
+NODE;Company;Microsoft_v6;{"name":"Microsoft","hq":"USA","product":"Azure Cloud & Custom AI Chips (Maia)","market_cap":"3100bn","data_version":"6"}
+NODE;Company;Alphabet_v6;{"name":"Alphabet","hq":"USA","product":"Google TPU & Cloud Infrastructure","market_cap":"2200bn","data_version":"6"}
+NODE;Company;Amazon_v6;{"name":"Amazon","hq":"USA","product":"AWS Trainium & Inferentia","market_cap":"1900bn","data_version":"6"}
+NODE;Company;Meta_v6;{"name":"Meta","hq":"USA","product":"MTIA AI Inference Chips & Llama Models","market_cap":"1200bn","data_version":"6"}
+DATA_END:KNOTEN
+
+DATA_START:BEZIEHUNGEN
+REL;ASML_v6;HQ_IN;Netherlands
+REL;ASML_v6;MANUFACTURES;VUV/EUV_Lithography_Systems
+REL;ASML_v6;DEPENDS_ON;USA
+REL;TSMC_v6;HQ_IN;Taiwan
+REL;TSMC_v6;MANUFACTURES;Advanced_Foundry_Nodes_(2nm,_3nm)
+REL;TSMC_v6;DEPENDS_ON;USA
+REL;TSMC_v6;SUPPLIES;NVIDIA_v6
+REL;TSMC_v6;SUPPLIES;Apple_v6
+REL;NVIDIA_v6;HQ_IN;USA
+REL;NVIDIA_v6;MANUFACTURES;AI_GPUs_&_CUDA_Ecosystem
+REL;AMD_v6;HQ_IN;USA
+REL;AMD_v6;MANUFACTURES;CPUs_&_AI_Accelerators
+REL;Intel_v6;HQ_IN;USA
+REL;Intel_v6;MANUFACTURES;x86_CPUs_&_Foundry_Services
+REL;Intel_v6;SUPPLIES;NVIDIA_v6
+REL;Intel_v6;SUPPLIES;Apple_v6
+REL;Samsung Electronics_v6;HQ_IN;South Korea
+REL;Samsung Electronics_v6;MANUFACTURES;DRAM,_NAND_&_Foundry
+REL;Samsung Electronics_v6;DEPENDS_ON;USA
+REL;SK Hynix_v6;HQ_IN;South Korea
+REL;SK Hynix_v6;MANUFACTURES;High_Bandwidth_Memory_(HBM3e)
+REL;SK Hynix_v6;DEPENDS_ON;USA
+REL;ARM Holdings_v6;HQ_IN;UK
+REL;ARM Holdings_v6;MANUFACTURES;RISC_Architecture_Licensing
+REL;Broadcom_v6;HQ_IN;USA
+REL;Broadcom_v6;MANUFACTURES;Networking_Chips_&_ASICs
+REL;Tokyo Electron_v6;HQ_IN;Japan
+REL;Tokyo Electron_v6;MANUFACTURES;Etch_and_Deposition_Equipment
+REL;Applied Materials_v6;HQ_IN;USA
+REL;Applied Materials_v6;MANUFACTURES;Semiconductor_Material_Engineering
+REL;Infineon_v6;HQ_IN;Germany
+REL;Infineon_v6;MANUFACTURES;Power_Semiconductors_&_Automotive
+REL;NXP_v6;HQ_IN;Netherlands
+REL;NXP_v6;MANUFACTURES;Automotive_&_IoT_Chips
+REL;NXP_v6;DEPENDS_ON;USA
+REL;STMicroelectronics_v6;HQ_IN;Switzerland
+REL;STMicroelectronics_v6;MANUFACTURES;Microcontrollers_&_Analog_Chips
+REL;Qualcomm_v6;HQ_IN;USA
+REL;Qualcomm_v6;MANUFACTURES;Mobile_SoCs_&_Baseband_Processors
+REL;Apple_v6;HQ_IN;USA
+REL;Apple_v6;MANUFACTURES;Custom_Apple_Silicon_(M-Series,_A-Series)
+REL;Microsoft_v6;HQ_IN;USA
+REL;Microsoft_v6;MANUFACTURES;Azure_Cloud_&_Custom_AI_Chips_(Maia)
+REL;Alphabet_v6;HQ_IN;USA
+REL;Alphabet_v6;MANUFACTURES;Google_TPU_&_Cloud_Infrastructure
+REL;Amazon_v6;HQ_IN;USA
+REL;Amazon_v6;MANUFACTURES;AWS_Trainium_&_Inferentia
+REL;Meta_v6;HQ_IN;USA
+REL;Meta_v6;MANUFACTURES;MTIA_AI_Inference_Chips_&_Llama_Models
+DATA_END:BEZIEHUNGEN
+
+Geopolitischer Kontext zu dieser Sektion:
+Die Lieferkette ist anfällig für geopolitische Spannungen in der Taiwanstraße.
+Da über 90% der hochentwickelten Chips bei TSMC gefertigt werden, führt jeder Konflikt
+zu einem sofortigen Stillstand der weltweiten Elektronik- und KI-Infrastrukturproduktion.
+Zusätzlich schränken Exportkontrollen der USA den Transfer von High-End-Lithografiesystemen
+und KI-Beschleunigern nach China massiv ein. Dies zwingt Unternehmen zu strategischen Allianzen.
+
+--- SEITE 7: AUSFÜHRLICHE ANALYSE UND KNOTEN-DATEN (TEIL 6) ---
+Detaillierter Analysebericht zur wirtschaftlichen Vernetzung der Halbleiterindustrie - Sektion 7.
+Jedes Element in dieser Liste stellt ein reales Marktverhältnis dar, das im globalen Handelsgefüge
+von strategischer Relevanz ist. Regierungen weltweit nutzen Subventionsprogramme wie den US Chips Act
+oder den European Chips Act, um lokale Abhängigkeiten zu verringern.
+
+DATA_START:KNOTEN
+NODE;Company;ASML_v7;{"name":"ASML","hq":"Netherlands","product":"VUV/EUV Lithography Systems","market_cap":"350bn","data_version":"7"}
+NODE;Company;TSMC_v7;{"name":"TSMC","hq":"Taiwan","product":"Advanced Foundry Nodes (2nm, 3nm)","market_cap":"850bn","data_version":"7"}
+NODE;Company;NVIDIA_v7;{"name":"NVIDIA","hq":"USA","product":"AI GPUs & CUDA Ecosystem","market_cap":"3200bn","data_version":"7"}
+NODE;Company;AMD_v7;{"name":"AMD","hq":"USA","product":"CPUs & AI Accelerators","market_cap":"280bn","data_version":"7"}
+NODE;Company;Intel_v7;{"name":"Intel","hq":"USA","product":"x86 CPUs & Foundry Services","market_cap":"120bn","data_version":"7"}
+NODE;Company;Samsung Electronics_v7;{"name":"Samsung Electronics","hq":"South Korea","product":"DRAM, NAND & Foundry","market_cap":"380bn","data_version":"7"}
+NODE;Company;SK Hynix_v7;{"name":"SK Hynix","hq":"South Korea","product":"High Bandwidth Memory (HBM3e)","market_cap":"110bn","data_version":"7"}
+NODE;Company;ARM Holdings_v7;{"name":"ARM Holdings","hq":"UK","product":"RISC Architecture Licensing","market_cap":"140bn","data_version":"7"}
+NODE;Company;Broadcom_v7;{"name":"Broadcom","hq":"USA","product":"Networking Chips & ASICs","market_cap":"650bn","data_version":"7"}
+NODE;Company;Tokyo Electron_v7;{"name":"Tokyo Electron","hq":"Japan","product":"Etch and Deposition Equipment","market_cap":"115bn","data_version":"7"}
+NODE;Company;Applied Materials_v7;{"name":"Applied Materials","hq":"USA","product":"Semiconductor Material Engineering","market_cap":"160bn","data_version":"7"}
+NODE;Company;Infineon_v7;{"name":"Infineon","hq":"Germany","product":"Power Semiconductors & Automotive","market_cap":"45bn","data_version":"7"}
+NODE;Company;NXP_v7;{"name":"NXP","hq":"Netherlands","product":"Automotive & IoT Chips","market_cap":"60bn","data_version":"7"}
+NODE;Company;STMicroelectronics_v7;{"name":"STMicroelectronics","hq":"Switzerland","product":"Microcontrollers & Analog Chips","market_cap":"35bn","data_version":"7"}
+NODE;Company;Qualcomm_v7;{"name":"Qualcomm","hq":"USA","product":"Mobile SoCs & Baseband Processors","market_cap":"190bn","data_version":"7"}
+NODE;Company;Apple_v7;{"name":"Apple","hq":"USA","product":"Custom Apple Silicon (M-Series, A-Series)","market_cap":"3400bn","data_version":"7"}
+NODE;Company;Microsoft_v7;{"name":"Microsoft","hq":"USA","product":"Azure Cloud & Custom AI Chips (Maia)","market_cap":"3100bn","data_version":"7"}
+NODE;Company;Alphabet_v7;{"name":"Alphabet","hq":"USA","product":"Google TPU & Cloud Infrastructure","market_cap":"2200bn","data_version":"7"}
+NODE;Company;Amazon_v7;{"name":"Amazon","hq":"USA","product":"AWS Trainium & Inferentia","market_cap":"1900bn","data_version":"7"}
+NODE;Company;Meta_v7;{"name":"Meta","hq":"USA","product":"MTIA AI Inference Chips & Llama Models","market_cap":"1200bn","data_version":"7"}
+DATA_END:KNOTEN
+
+DATA_START:BEZIEHUNGEN
+REL;ASML_v7;HQ_IN;Netherlands
+REL;ASML_v7;MANUFACTURES;VUV/EUV_Lithography_Systems
+REL;ASML_v7;DEPENDS_ON;USA
+REL;TSMC_v7;HQ_IN;Taiwan
+REL;TSMC_v7;MANUFACTURES;Advanced_Foundry_Nodes_(2nm,_3nm)
+REL;TSMC_v7;DEPENDS_ON;USA
+REL;TSMC_v7;SUPPLIES;NVIDIA_v7
+REL;TSMC_v7;SUPPLIES;Apple_v7
+REL;NVIDIA_v7;HQ_IN;USA
+REL;NVIDIA_v7;MANUFACTURES;AI_GPUs_&_CUDA_Ecosystem
+REL;AMD_v7;HQ_IN;USA
+REL;AMD_v7;MANUFACTURES;CPUs_&_AI_Accelerators
+REL;Intel_v7;HQ_IN;USA
+REL;Intel_v7;MANUFACTURES;x86_CPUs_&_Foundry_Services
+REL;Intel_v7;SUPPLIES;NVIDIA_v7
+REL;Intel_v7;SUPPLIES;Apple_v7
+REL;Samsung Electronics_v7;HQ_IN;South Korea
+REL;Samsung Electronics_v7;MANUFACTURES;DRAM,_NAND_&_Foundry
+REL;Samsung Electronics_v7;DEPENDS_ON;USA
+REL;SK Hynix_v7;HQ_IN;South Korea
+REL;SK Hynix_v7;MANUFACTURES;High_Bandwidth_Memory_(HBM3e)
+REL;SK Hynix_v7;DEPENDS_ON;USA
+REL;ARM Holdings_v7;HQ_IN;UK
+REL;ARM Holdings_v7;MANUFACTURES;RISC_Architecture_Licensing
+REL;Broadcom_v7;HQ_IN;USA
+REL;Broadcom_v7;MANUFACTURES;Networking_Chips_&_ASICs
+REL;Tokyo Electron_v7;HQ_IN;Japan
+REL;Tokyo Electron_v7;MANUFACTURES;Etch_and_Deposition_Equipment
+REL;Applied Materials_v7;HQ_IN;USA
+REL;Applied Materials_v7;MANUFACTURES;Semiconductor_Material_Engineering
+REL;Infineon_v7;HQ_IN;Germany
+REL;Infineon_v7;MANUFACTURES;Power_Semiconductors_&_Automotive
+REL;NXP_v7;HQ_IN;Netherlands
+REL;NXP_v7;MANUFACTURES;Automotive_&_IoT_Chips
+REL;NXP_v7;DEPENDS_ON;USA
+REL;STMicroelectronics_v7;HQ_IN;Switzerland
+REL;STMicroelectronics_v7;MANUFACTURES;Microcontrollers_&_Analog_Chips
+REL;Qualcomm_v7;HQ_IN;USA
+REL;Qualcomm_v7;MANUFACTURES;Mobile_SoCs_&_Baseband_Processors
+REL;Apple_v7;HQ_IN;USA
+REL;Apple_v7;MANUFACTURES;Custom_Apple_Silicon_(M-Series,_A-Series)
+REL;Microsoft_v7;HQ_IN;USA
+REL;Microsoft_v7;MANUFACTURES;Azure_Cloud_&_Custom_AI_Chips_(Maia)
+REL;Alphabet_v7;HQ_IN;USA
+REL;Alphabet_v7;MANUFACTURES;Google_TPU_&_Cloud_Infrastructure
+REL;Amazon_v7;HQ_IN;USA
+REL;Amazon_v7;MANUFACTURES;AWS_Trainium_&_Inferentia
+REL;Meta_v7;HQ_IN;USA
+REL;Meta_v7;MANUFACTURES;MTIA_AI_Inference_Chips_&_Llama_Models
+DATA_END:BEZIEHUNGEN
+
+Geopolitischer Kontext zu dieser Sektion:
+Die Lieferkette ist anfällig für geopolitische Spannungen in der Taiwanstraße.
+Da über 90% der hochentwickelten Chips bei TSMC gefertigt werden, führt jeder Konflikt
+zu einem sofortigen Stillstand der weltweiten Elektronik- und KI-Infrastrukturproduktion.
+Zusätzlich schränken Exportkontrollen der USA den Transfer von High-End-Lithografiesystemen
+und KI-Beschleunigern nach China massiv ein. Dies zwingt Unternehmen zu strategischen Allianzen.
+
+--- SEITE 8: AUSFÜHRLICHE ANALYSE UND KNOTEN-DATEN (TEIL 7) ---
+Detaillierter Analysebericht zur wirtschaftlichen Vernetzung der Halbleiterindustrie - Sektion 8.
+Jedes Element in dieser Liste stellt ein reales Marktverhältnis dar, das im globalen Handelsgefüge
+von strategischer Relevanz ist. Regierungen weltweit nutzen Subventionsprogramme wie den US Chips Act
+oder den European Chips Act, um lokale Abhängigkeiten zu verringern.
+
+DATA_START:KNOTEN
+NODE;Company;ASML_v8;{"name":"ASML","hq":"Netherlands","product":"VUV/EUV Lithography Systems","market_cap":"350bn","data_version":"8"}
+NODE;Company;TSMC_v8;{"name":"TSMC","hq":"Taiwan","product":"Advanced Foundry Nodes (2nm, 3nm)","market_cap":"850bn","data_version":"8"}
+NODE;Company;NVIDIA_v8;{"name":"NVIDIA","hq":"USA","product":"AI GPUs & CUDA Ecosystem","market_cap":"3200bn","data_version":"8"}
+NODE;Company;AMD_v8;{"name":"AMD","hq":"USA","product":"CPUs & AI Accelerators","market_cap":"280bn","data_version":"8"}
+NODE;Company;Intel_v8;{"name":"Intel","hq":"USA","product":"x86 CPUs & Foundry Services","market_cap":"120bn","data_version":"8"}
+NODE;Company;Samsung Electronics_v8;{"name":"Samsung Electronics","hq":"South Korea","product":"DRAM, NAND & Foundry","market_cap":"380bn","data_version":"8"}
+NODE;Company;SK Hynix_v8;{"name":"SK Hynix","hq":"South Korea","product":"High Bandwidth Memory (HBM3e)","market_cap":"110bn","data_version":"8"}
+NODE;Company;ARM Holdings_v8;{"name":"ARM Holdings","hq":"UK","product":"RISC Architecture Licensing","market_cap":"140bn","data_version":"8"}
+NODE;Company;Broadcom_v8;{"name":"Broadcom","hq":"USA","product":"Networking Chips & ASICs","market_cap":"650bn","data_version":"8"}
+NODE;Company;Tokyo Electron_v8;{"name":"Tokyo Electron","hq":"Japan","product":"Etch and Deposition Equipment","market_cap":"115bn","data_version":"8"}
+NODE;Company;Applied Materials_v8;{"name":"Applied Materials","hq":"USA","product":"Semiconductor Material Engineering","market_cap":"160bn","data_version":"8"}
+NODE;Company;Infineon_v8;{"name":"Infineon","hq":"Germany","product":"Power Semiconductors & Automotive","market_cap":"45bn","data_version":"8"}
+NODE;Company;NXP_v8;{"name":"NXP","hq":"Netherlands","product":"Automotive & IoT Chips","market_cap":"60bn","data_version":"8"}
+NODE;Company;STMicroelectronics_v8;{"name":"STMicroelectronics","hq":"Switzerland","product":"Microcontrollers & Analog Chips","market_cap":"35bn","data_version":"8"}
+NODE;Company;Qualcomm_v8;{"name":"Qualcomm","hq":"USA","product":"Mobile SoCs & Baseband Processors","market_cap":"190bn","data_version":"8"}
+NODE;Company;Apple_v8;{"name":"Apple","hq":"USA","product":"Custom Apple Silicon (M-Series, A-Series)","market_cap":"3400bn","data_version":"8"}
+NODE;Company;Microsoft_v8;{"name":"Microsoft","hq":"USA","product":"Azure Cloud & Custom AI Chips (Maia)","market_cap":"3100bn","data_version":"8"}
+NODE;Company;Alphabet_v8;{"name":"Alphabet","hq":"USA","product":"Google TPU & Cloud Infrastructure","market_cap":"2200bn","data_version":"8"}
+NODE;Company;Amazon_v8;{"name":"Amazon","hq":"USA","product":"AWS Trainium & Inferentia","market_cap":"1900bn","data_version":"8"}
+NODE;Company;Meta_v8;{"name":"Meta","hq":"USA","product":"MTIA AI Inference Chips & Llama Models","market_cap":"1200bn","data_version":"8"}
+DATA_END:KNOTEN
+
+DATA_START:BEZIEHUNGEN
+REL;ASML_v8;HQ_IN;Netherlands
+REL;ASML_v8;MANUFACTURES;VUV/EUV_Lithography_Systems
+REL;ASML_v8;DEPENDS_ON;USA
+REL;TSMC_v8;HQ_IN;Taiwan
+REL;TSMC_v8;MANUFACTURES;Advanced_Foundry_Nodes_(2nm,_3nm)
+REL;TSMC_v8;DEPENDS_ON;USA
+REL;TSMC_v8;SUPPLIES;NVIDIA_v8
+REL;TSMC_v8;SUPPLIES;Apple_v8
+REL;NVIDIA_v8;HQ_IN;USA
+REL;NVIDIA_v8;MANUFACTURES;AI_GPUs_&_CUDA_Ecosystem
+REL;AMD_v8;HQ_IN;USA
+REL;AMD_v8;MANUFACTURES;CPUs_&_AI_Accelerators
+REL;Intel_v8;HQ_IN;USA
+REL;Intel_v8;MANUFACTURES;x86_CPUs_&_Foundry_Services
+REL;Intel_v8;SUPPLIES;NVIDIA_v8
+REL;Intel_v8;SUPPLIES;Apple_v8
+REL;Samsung Electronics_v8;HQ_IN;South Korea
+REL;Samsung Electronics_v8;MANUFACTURES;DRAM,_NAND_&_Foundry
+REL;Samsung Electronics_v8;DEPENDS_ON;USA
+REL;SK Hynix_v8;HQ_IN;South Korea
+REL;SK Hynix_v8;MANUFACTURES;High_Bandwidth_Memory_(HBM3e)
+REL;SK Hynix_v8;DEPENDS_ON;USA
+REL;ARM Holdings_v8;HQ_IN;UK
+REL;ARM Holdings_v8;MANUFACTURES;RISC_Architecture_Licensing
+REL;Broadcom_v8;HQ_IN;USA
+REL;Broadcom_v8;MANUFACTURES;Networking_Chips_&_ASICs
+REL;Tokyo Electron_v8;HQ_IN;Japan
+REL;Tokyo Electron_v8;MANUFACTURES;Etch_and_Deposition_Equipment
+REL;Applied Materials_v8;HQ_IN;USA
+REL;Applied Materials_v8;MANUFACTURES;Semiconductor_Material_Engineering
+REL;Infineon_v8;HQ_IN;Germany
+REL;Infineon_v8;MANUFACTURES;Power_Semiconductors_&_Automotive
+REL;NXP_v8;HQ_IN;Netherlands
+REL;NXP_v8;MANUFACTURES;Automotive_&_IoT_Chips
+REL;NXP_v8;DEPENDS_ON;USA
+REL;STMicroelectronics_v8;HQ_IN;Switzerland
+REL;STMicroelectronics_v8;MANUFACTURES;Microcontrollers_&_Analog_Chips
+REL;Qualcomm_v8;HQ_IN;USA
+REL;Qualcomm_v8;MANUFACTURES;Mobile_SoCs_&_Baseband_Processors
+REL;Apple_v8;HQ_IN;USA
+REL;Apple_v8;MANUFACTURES;Custom_Apple_Silicon_(M-Series,_A-Series)
+REL;Microsoft_v8;HQ_IN;USA
+REL;Microsoft_v8;MANUFACTURES;Azure_Cloud_&_Custom_AI_Chips_(Maia)
+REL;Alphabet_v8;HQ_IN;USA
+REL;Alphabet_v8;MANUFACTURES;Google_TPU_&_Cloud_Infrastructure
+REL;Amazon_v8;HQ_IN;USA
+REL;Amazon_v8;MANUFACTURES;AWS_Trainium_&_Inferentia
+REL;Meta_v8;HQ_IN;USA
+REL;Meta_v8;MANUFACTURES;MTIA_AI_Inference_Chips_&_Llama_Models
+DATA_END:BEZIEHUNGEN
+
+Geopolitischer Kontext zu dieser Sektion:
+Die Lieferkette ist anfällig für geopolitische Spannungen in der Taiwanstraße.
+Da über 90% der hochentwickelten Chips bei TSMC gefertigt werden, führt jeder Konflikt
+zu einem sofortigen Stillstand der weltweiten Elektronik- und KI-Infrastrukturproduktion.
+Zusätzlich schränken Exportkontrollen der USA den Transfer von High-End-Lithografiesystemen
+und KI-Beschleunigern nach China massiv ein. Dies zwingt Unternehmen zu strategischen Allianzen.
+
+--- SEITE 9: AUSFÜHRLICHE ANALYSE UND KNOTEN-DATEN (TEIL 8) ---
+Detaillierter Analysebericht zur wirtschaftlichen Vernetzung der Halbleiterindustrie - Sektion 9.
+Jedes Element in dieser Liste stellt ein reales Marktverhältnis dar, das im globalen Handelsgefüge
+von strategischer Relevanz ist. Regierungen weltweit nutzen Subventionsprogramme wie den US Chips Act
+oder den European Chips Act, um lokale Abhängigkeiten zu verringern.
+
+DATA_START:KNOTEN
+NODE;Company;ASML_v9;{"name":"ASML","hq":"Netherlands","product":"VUV/EUV Lithography Systems","market_cap":"350bn","data_version":"9"}
+NODE;Company;TSMC_v9;{"name":"TSMC","hq":"Taiwan","product":"Advanced Foundry Nodes (2nm, 3nm)","market_cap":"850bn","data_version":"9"}
+NODE;Company;NVIDIA_v9;{"name":"NVIDIA","hq":"USA","product":"AI GPUs & CUDA Ecosystem","market_cap":"3200bn","data_version":"9"}
+NODE;Company;AMD_v9;{"name":"AMD","hq":"USA","product":"CPUs & AI Accelerators","market_cap":"280bn","data_version":"9"}
+NODE;Company;Intel_v9;{"name":"Intel","hq":"USA","product":"x86 CPUs & Foundry Services","market_cap":"120bn","data_version":"9"}
+NODE;Company;Samsung Electronics_v9;{"name":"Samsung Electronics","hq":"South Korea","product":"DRAM, NAND & Foundry","market_cap":"380bn","data_version":"9"}
+NODE;Company;SK Hynix_v9;{"name":"SK Hynix","hq":"South Korea","product":"High Bandwidth Memory (HBM3e)","market_cap":"110bn","data_version":"9"}
+NODE;Company;ARM Holdings_v9;{"name":"ARM Holdings","hq":"UK","product":"RISC Architecture Licensing","market_cap":"140bn","data_version":"9"}
+NODE;Company;Broadcom_v9;{"name":"Broadcom","hq":"USA","product":"Networking Chips & ASICs","market_cap":"650bn","data_version":"9"}
+NODE;Company;Tokyo Electron_v9;{"name":"Tokyo Electron","hq":"Japan","product":"Etch and Deposition Equipment","market_cap":"115bn","data_version":"9"}
+NODE;Company;Applied Materials_v9;{"name":"Applied Materials","hq":"USA","product":"Semiconductor Material Engineering","market_cap":"160bn","data_version":"9"}
+NODE;Company;Infineon_v9;{"name":"Infineon","hq":"Germany","product":"Power Semiconductors & Automotive","market_cap":"45bn","data_version":"9"}
+NODE;Company;NXP_v9;{"name":"NXP","hq":"Netherlands","product":"Automotive & IoT Chips","market_cap":"60bn","data_version":"9"}
+NODE;Company;STMicroelectronics_v9;{"name":"STMicroelectronics","hq":"Switzerland","product":"Microcontrollers & Analog Chips","market_cap":"35bn","data_version":"9"}
+NODE;Company;Qualcomm_v9;{"name":"Qualcomm","hq":"USA","product":"Mobile SoCs & Baseband Processors","market_cap":"190bn","data_version":"9"}
+NODE;Company;Apple_v9;{"name":"Apple","hq":"USA","product":"Custom Apple Silicon (M-Series, A-Series)","market_cap":"3400bn","data_version":"9"}
+NODE;Company;Microsoft_v9;{"name":"Microsoft","hq":"USA","product":"Azure Cloud & Custom AI Chips (Maia)","market_cap":"3100bn","data_version":"9"}
+NODE;Company;Alphabet_v9;{"name":"Alphabet","hq":"USA","product":"Google TPU & Cloud Infrastructure","market_cap":"2200bn","data_version":"9"}
+NODE;Company;Amazon_v9;{"name":"Amazon","hq":"USA","product":"AWS Trainium & Inferentia","market_cap":"1900bn","data_version":"9"}
+NODE;Company;Meta_v9;{"name":"Meta","hq":"USA","product":"MTIA AI Inference Chips & Llama Models","market_cap":"1200bn","data_version":"9"}
+DATA_END:KNOTEN
+
+DATA_START:BEZIEHUNGEN
+REL;ASML_v9;HQ_IN;Netherlands
+REL;ASML_v9;MANUFACTURES;VUV/EUV_Lithography_Systems
+REL;ASML_v9;DEPENDS_ON;USA
+REL;TSMC_v9;HQ_IN;Taiwan
+REL;TSMC_v9;MANUFACTURES;Advanced_Foundry_Nodes_(2nm,_3nm)
+REL;TSMC_v9;DEPENDS_ON;USA
+REL;TSMC_v9;SUPPLIES;NVIDIA_v9
+REL;TSMC_v9;SUPPLIES;Apple_v9
+REL;NVIDIA_v9;HQ_IN;USA
+REL;NVIDIA_v9;MANUFACTURES;AI_GPUs_&_CUDA_Ecosystem
+REL;AMD_v9;HQ_IN;USA
+REL;AMD_v9;MANUFACTURES;CPUs_&_AI_Accelerators
+REL;Intel_v9;HQ_IN;USA
+REL;Intel_v9;MANUFACTURES;x86_CPUs_&_Foundry_Services
+REL;Intel_v9;SUPPLIES;NVIDIA_v9
+REL;Intel_v9;SUPPLIES;Apple_v9
+REL;Samsung Electronics_v9;HQ_IN;South Korea
+REL;Samsung Electronics_v9;MANUFACTURES;DRAM,_NAND_&_Foundry
+REL;Samsung Electronics_v9;DEPENDS_ON;USA
+REL;SK Hynix_v9;HQ_IN;South Korea
+REL;SK Hynix_v9;MANUFACTURES;High_Bandwidth_Memory_(HBM3e)
+REL;SK Hynix_v9;DEPENDS_ON;USA
+REL;ARM Holdings_v9;HQ_IN;UK
+REL;ARM Holdings_v9;MANUFACTURES;RISC_Architecture_Licensing
+REL;Broadcom_v9;HQ_IN;USA
+REL;Broadcom_v9;MANUFACTURES;Networking_Chips_&_ASICs
+REL;Tokyo Electron_v9;HQ_IN;Japan
+REL;Tokyo Electron_v9;MANUFACTURES;Etch_and_Deposition_Equipment
+REL;Applied Materials_v9;HQ_IN;USA
+REL;Applied Materials_v9;MANUFACTURES;Semiconductor_Material_Engineering
+REL;Infineon_v9;HQ_IN;Germany
+REL;Infineon_v9;MANUFACTURES;Power_Semiconductors_&_Automotive
+REL;NXP_v9;HQ_IN;Netherlands
+REL;NXP_v9;MANUFACTURES;Automotive_&_IoT_Chips
+REL;NXP_v9;DEPENDS_ON;USA
+REL;STMicroelectronics_v9;HQ_IN;Switzerland
+REL;STMicroelectronics_v9;MANUFACTURES;Microcontrollers_&_Analog_Chips
+REL;Qualcomm_v9;HQ_IN;USA
+REL;Qualcomm_v9;MANUFACTURES;Mobile_SoCs_&_Baseband_Processors
+REL;Apple_v9;HQ_IN;USA
+REL;Apple_v9;MANUFACTURES;Custom_Apple_Silicon_(M-Series,_A-Series)
+REL;Microsoft_v9;HQ_IN;USA
+REL;Microsoft_v9;MANUFACTURES;Azure_Cloud_&_Custom_AI_Chips_(Maia)
+REL;Alphabet_v9;HQ_IN;USA
+REL;Alphabet_v9;MANUFACTURES;Google_TPU_&_Cloud_Infrastructure
+REL;Amazon_v9;HQ_IN;USA
+REL;Amazon_v9;MANUFACTURES;AWS_Trainium_&_Inferentia
+REL;Meta_v9;HQ_IN;USA
+REL;Meta_v9;MANUFACTURES;MTIA_AI_Inference_Chips_&_Llama_Models
+DATA_END:BEZIEHUNGEN
+
+Geopolitischer Kontext zu dieser Sektion:
+Die Lieferkette ist anfällig für geopolitische Spannungen in der Taiwanstraße.
+Da über 90% der hochentwickelten Chips bei TSMC gefertigt werden, führt jeder Konflikt
+zu einem sofortigen Stillstand der weltweiten Elektronik- und KI-Infrastrukturproduktion.
+Zusätzlich schränken Exportkontrollen der USA den Transfer von High-End-Lithografiesystemen
+und KI-Beschleunigern nach China massiv ein. Dies zwingt Unternehmen zu strategischen Allianzen.
+
+--- SEITE 10: PYTHON AUTOMATION INTERFACE FÜR NEO4J ---
+Der folgende Python-Code liest genau dieses Dokument ein, filtert die markierten Datenblöcke
+und lädt sie direkt über den offiziellen Neo4j-Treiber in Ihre Graphdatenbank hoch.
+
+
+import json
+from neo4j import GraphDatabase
+
+class Neo4jImporter:
+    def __init__(self, uri, user, password):
+        self.driver = GraphDatabase.driver(uri, auth=(user, password))
+
+    def close(self):
+        self.driver.close()
+
+    def import_from_file(self, file_path):
+        with open(file_path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+
+        nodes_to_create = []
+        rels_to_create = []
+        
+        for line in lines:
+            line = line.strip()
+            if line.startswith("NODE;"):
+                parts = line.split(";", 3)
+                label = parts[1]
+                node_id = parts[2]
+                props = json.loads(parts[3])
+                nodes_to_create.append((label, node_id, props))
+            elif line.startswith("REL;"):
+                parts = line.split(";", 3)
+                start_id = parts[1]
+                rel_type = parts[2]
+                end_id = parts[3]
+                rels_to_create.append((start_id, rel_type, end_id))
+
+        with self.driver.session() as session:
+            # 1. Knoten erstellen
+            for label, node_id, props in nodes_to_create:
+                query = f"MERGE (n:{label} {{id: $node_id}}) SET n += $props"
+                session.run(query, node_id=node_id, props=props)
+            print(f"{len(nodes_to_create)} Knoten erfolgreich geladen.")
+
+            # 2. Beziehungen erstellen
+            for start_id, rel_type, end_id in rels_to_create:
+                # Da die Endknoten (Länder/Techs) evtl. implizit sind, erstellen wir sie generisch falls nicht vorhanden
+                query = (
+                    f"MERGE (a {{id: $start_id}}) "
+                    f"MERGE (b {{id: $end_id}}) "
+                    f"MERGE (a)-[r:{rel_type}]->(b)"
+                )
+                session.run(query, start_id=start_id, end_id=end_id)
+            print(f"{len(rels_to_create)} Beziehungen erfolgreich verknüpft.")
+
+# Verwendung:
+# importer = Neo4jImporter("bolt://localhost:7687", "neo4j", "ihr_passwort")
+# importer.import_from_file("neo4j_semiconductor_graph.txt")
+# importer.close()

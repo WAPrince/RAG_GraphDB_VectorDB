@@ -1,0 +1,9 @@
+langchain_mcp_adapters
+fastmcp
+langchain_aws
+langgraph
+qdrant_client
+fastembed
+pydantic-settings
+neo4j
+pypdf
