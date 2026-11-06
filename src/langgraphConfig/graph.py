@@ -15,16 +15,15 @@ async def create_graph():
     tools = [
         *mcp_tools,
     ]
-    llm_with_tools = llm.bind_tools(tools)
+    #  Tools binden und Tool-Calling erzwingen ("any")
+    llm_with_tools = llm.bind_tools(tools)#,tool_choice="any")
     tool_node = ToolNode(
         tools,
         handle_tool_errors=True,
     )
 
     def call_model(state: AgentState) -> dict:
-        #print(f"Call_model DAVOR")
         response = llm_with_tools.invoke(state["messages"])
-        #print(f"Call_model DANACH")
         return {"messages": [response]}
 
     def route_after_model(state: AgentState) -> str:
@@ -34,22 +33,31 @@ async def create_graph():
             return "end"
         return "tools"
 
+    def evaluate(state: AgentState) :
+        print("Evaluate")
+
     ###################################################
 
     builder = StateGraph(AgentState)
     builder.add_node("call_model", call_model)
     builder.add_node("tools", tool_node)
 
+
+
     builder.add_edge(START, "call_model")
     builder.add_conditional_edges(
         "call_model",
         route_after_model,
         {
+            #"evaluate": "evaluate",
             "end": END,
             "tools": "tools",
        },
     )
     builder.add_edge("tools", "call_model")
+    #builder.add_edge("evaluate", END)
+
+
     checkpointer = InMemorySaver()
     return builder.compile(
         checkpointer=checkpointer

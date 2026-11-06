@@ -1,6 +1,7 @@
 from qdrant_client import QdrantClient
 from retrieval.vectorEmbeddings import create_embedding_model
 
+
 QDRANT_URL = "http://localhost:6333"
 COLLECTION_NAME = "knowledge"
 

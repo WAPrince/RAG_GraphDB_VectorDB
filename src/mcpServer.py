@@ -1,8 +1,7 @@
 from mcp.server.fastmcp import FastMCP
-from retrieval.graphDbRetrieval import search_documents_in_graphdb
-from retrieval.vectorDbRetrieval import search_documents_in_vectordb
 import inspect
-
+from retrieval.vectorDbRetrieval import  search_documents_in_vectordb
+from retrieval.graphDbRetrieval import search_documents_in_graphdb
 
 mcp = FastMCP("demo-server",port=3005)
 print(inspect.signature(FastMCP))
@@ -12,7 +11,12 @@ print(inspect.signature(mcp.run))
 def search_in_vectordb(query: str, limit: int = 3) -> str:
     """Search the qdrant vectordb ( knowledge base )  for information relevant to the query."""
 
-    documents = search_documents_in_vectordb(query, limit=limit)
+    print("vor")
+    try:
+        documents = search_documents_in_vectordb(query, limit=limit)
+    except Exception as e:
+        print(f"Exception {e}")
+    print("nach")
     if not documents:
         return "No relevant documents found."##
     result = []

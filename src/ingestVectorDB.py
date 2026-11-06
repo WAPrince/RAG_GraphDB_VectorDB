@@ -1,4 +1,3 @@
-
 from pathlib import Path
 from uuid import uuid4
 from datetime import datetime
@@ -8,9 +7,10 @@ from retrieval.vectorDbRetrieval import COLLECTION_NAME
 from retrieval.vectorStore import create_qdrant_client
 
 
+DATA_FILE = Path("C:/Daten/IT/DEV/Python/RAG_GraphDB_VectorDB/data/input/vectordb_source_v2.txt")
+#DATA_FILE = Path("C:/Daten/IT/DEV/Python/RAG_GraphDB_VectorDB/data/input/vectordb_amd.txt")
+COLLECTION_NAME = "knowledge"
 
-#DATA_FILE = Path("/data/input/vectordb_source_v2.txt")
-DATA_FILE = Path("C:/Daten/IT/DEV/Python/RAG_GraphDB_VectorDB/data/input/vectordb_amd.txt")
 
 def _load_document(file :Path ) -> str:
     return file.read_text(
@@ -33,7 +33,7 @@ def _split_into_chunks(
     return chunks
 
 def _ingest(file : str ) -> None:
-    try:
+    #try:
         text = _load_document(file)
         start = datetime.now()
         chunks = _split_into_chunks(text)
@@ -82,8 +82,8 @@ def _ingest(file : str ) -> None:
 
         points = []
 
-        for chunk, embedding in zip(chunks, embeddings):
-            print(f"chunk {chunk.index}")
+        for index, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
+            print(f"chunk {index}")
             points.append(
                 models.PointStruct(
                     id=str(uuid4()),
@@ -103,8 +103,8 @@ def _ingest(file : str ) -> None:
         duration = end - start
         print(f"Einlesedauer in Sekunden: {duration.total_seconds()}")
         print(f"End")
-    except Exception as e:
-        print(f"Exception ${e}")
+   # except Exception as e:
+    #    print(f"Exception ${e}")
 
 if __name__ == "__main__":
     _ingest(DATA_FILE)
