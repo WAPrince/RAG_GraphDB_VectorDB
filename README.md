@@ -7,8 +7,12 @@ Features:
 
     3. Call MCP tools at most 3 times 
 
+**--------------------------------------------------------------------------------------------------------------------**
 
-**USE CASE VectorDB 1/2 : query MCP tool VectorDB (Qdrant) and GraphDB (Neo) via AWS Bedrock ( maximum 3 MCP tool calls )-------------------------------------------------------------------------------- **
+USE CASE 1 : query MCP tool VectorDB (Qdrant) and GraphDB (Neo) via AWS Bedrock ( maximum 3 MCP tool calls ) 
+
+**--------------------------------------------------------------------------------------------------------------------**
+
 
 *1.1 Start and ingest VECTOR  database* 
 
@@ -54,12 +58,16 @@ Result:
 TODO
 """
 
+**--------------------------------------------------------------------------------------------------------------------**
 
-**USE CASE Graph DB 2/2 : query MCP tool VectorDB (Qdrant) and GraphDB (Neo) direct via Anthropic ( maximum 3 MCP tool calls ) ----------------------------------------------------------------------------------- **
+USE CASE 2 : query MCP tool VectorDB (Qdrant) and GraphDB (Neo) direct via Anthropic ( maximum 3 MCP tool calls )  
 
-1. Start VectorDB and GraphDB 
+**--------------------------------------------------------------------------------------------------------------------**
+
+
+*1. Start VectorDB and GraphDB *
 see above
-
+*2.* 
 
 *2. Start MCP server*
 
@@ -77,8 +85,6 @@ Result:
 """
 Hier sind die Informationen, die ich zu **AMD** in der Graphdatenbank gefunden habe:
 
----
-
 🔴 AMD (Advanced Micro Devices)
 
 - 🏭 **Produkte:** AMD stellt **CPUs & KI-Beschleuniger** (AI Accelerators) her.
@@ -89,7 +95,12 @@ Hier sind die Informationen, die ich zu **AMD** in der Graphdatenbank gefunden h
 AMD ist ein bedeutender Halbleiterhersteller, der vor allem für seine Prozessoren (CPUs) und zunehmend auch für KI-Hardware bekannt ist. Möchtest du mehr über bestimmte Produkte oder Zusammenhänge von AMD erfahren?
 """
 
-+++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++ +++
+
+**--------------------------------------------------------------------------------------------------------------------**
+
+**--------------------------------------------------------------------------------------------------------------------**
+
+**--------------------------------------------------------------------------------------------------------------------**
 
 
 BACKGROUND
@@ -113,6 +124,12 @@ In modernen Enterprise-Architekturen nutzt man meist einen hybriden Ansatz:
 2. Graphsuche (Strukturierte Beziehungen): Für das Abfragen von Fakten, Hierarchien und Netzwerken.
 3. Kombination: Das LLM erhält sowohl die Textfragmente als auch die extrahierten Graphen-Zusammenhänge (oft als Wissensgraph / Knowledge Graph), um die finale Antwort zu generieren. Frameworks wie LangChain, LlamaIndex oder Microsofts eigenes GraphRAG-Repository bieten dafür standardisierte Implementierungen.
 
+
+**--------------------------------------------------------------------------------------------------------------------**
+
+**--------------------------------------------------------------------------------------------------------------------**
+
+**--------------------------------------------------------------------------------------------------------------------**
 
 SANDBOX
 
