@@ -2,6 +2,7 @@ import asyncio
 import os
 from typing import Literal
 
+from dotenv import load_dotenv
 from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.constants import START, END
 from langgraph.graph import StateGraph
@@ -16,13 +17,16 @@ from mcpapi.mcpClient import create_mcp_client
 
 async def run_agent(prompt: str) -> None:
 
-    mcp_url = "http://localhost:3005/mcp"
+    load_dotenv()
+    print(f" AWS_REGION: {os.getenv("AWS_REGION")}")
+    print(f" AWS_PROFILE: {os.getenv("AWS_PROFILE")}")
+
     MAX_TOOL_CALLS = 3
+    mcp_url = "http://localhost:3005/mcp"
 
     async with streamablehttp_client(mcp_url) as (read, write, _):
         async with ClientSession(read, write) as session:
             await session.initialize()
-
             llm = create_bedrock_llm()
             mcp_client = create_mcp_client()
             mcp_tools = await mcp_client.get_tools()
@@ -32,37 +36,24 @@ async def run_agent(prompt: str) -> None:
             llm_with_tools = llm.bind_tools(tools)
 
             def call_model(state: AgentState) -> dict:
-                # print(f"Call_model DAVOR")
                 response = llm_with_tools.invoke(state["messages"])
-                # print(f"Call_model DANACH")
                 return {"messages": [response]}
 
-            # Middleware-Funktion vor der Tool-Ausführung: Erhöht den Zähler
             async def tool_middleware_node(state: AgentState):
-                # Wir holen den aktuellen Zählerstand (Default 0, falls noch nicht gesetzt)
                 current_count = state.get("tool_call_count", 0)
                 new_count = current_count + 1
                 print(f"\n[Middleware] Tool-Aufruf {new_count} von maximal {MAX_TOOL_CALLS} wird ausgeführt...")
-
-                # Leitet den Aufruf an den echten ToolNode weiter
                 tool_node_instance = ToolNode(mcp_tools)
                 result = await tool_node_instance.ainvoke(state)
-
-                # Wir geben das Ergebnis des Tools UND den aktualisierten Zähler zurück
                 return {**result, "tool_call_count": new_count}
 
-            # Bedingte Logik mit Limit-Prüfung
             def should_continue(state: AgentState) -> Literal["tools", "__end__"]:
                 last_message = state["messages"][-1]
                 current_count = state.get("tool_call_count", 0)
-
-                # Falls das Modell Tools aufrufen will
                 if last_message.tool_calls:
-                    # HIER greift die Begrenzung: Wenn das Limit erreicht ist, brechen wir ab
                     if current_count >= MAX_TOOL_CALLS:
                         print(
                             f"\n[Middleware] HINWEIS: Limit von {MAX_TOOL_CALLS} Tool-Aufrufen erreicht! Breche ab.")
-                        # session.complete()
                         return "__end__"
                     return "tools"
                 return "__end__"
@@ -98,7 +89,6 @@ async def run_agent(prompt: str) -> None:
 
 async def main() -> None:
     await run_agent(
-        # VectorDB
         "Was ist den Piloten passiert? Gib deine Quellen an!")
 
 
