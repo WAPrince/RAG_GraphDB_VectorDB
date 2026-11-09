@@ -6,9 +6,8 @@ from retrieval.vectorEmbeddings import create_embedding_model
 from retrieval.vectorDbRetrieval import COLLECTION_NAME
 from retrieval.vectorStore import create_qdrant_client
 
-
-DATA_FILE = Path("C:/Daten/IT/DEV/Python/RAG_GraphDB_VectorDB/data/input/vectordb_source_v2.txt")
-#DATA_FILE = Path("C:/Daten/IT/DEV/Python/RAG_GraphDB_VectorDB/data/input/vectordb_amd.txt")
+#DATA_FILE = Path("C:/Daten/IT/DEV/Python/RAG_GraphDB_VectorDB/data/input/vectordb_source_v2.txt")
+DATA_FILE = Path("C:/Daten/IT/DEV/Python/RAG_GraphDB_VectorDB/data/input/vectordb_amd.txt")
 COLLECTION_NAME = "knowledge"
 
 

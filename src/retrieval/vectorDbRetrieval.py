@@ -13,7 +13,7 @@ def create_qdrant_client() -> QdrantClient:
 # semantic search
 def search_documents_in_vectordb(query:str, limit: int = 3) -> list[dict]:
 
-    print("search_documents_in_vectordb")
+    print("search_documents_in_vectordb START")
     embedding_model = create_embedding_model()
     query_embedding = next(
         embedding_model.embed([query])
@@ -36,6 +36,7 @@ def search_documents_in_vectordb(query:str, limit: int = 3) -> list[dict]:
                 "source": point.payload["source"]
             }
         )
-    print(f"search_documents_in_vectordb documents : {documents}")
+    #print(f"search_documents_in_vectordb documents : {documents}")
+    print("search_documents_in_vectordb END")
 
     return documents

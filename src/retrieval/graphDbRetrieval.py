@@ -60,6 +60,8 @@ def _format_records_to_json(records, summary=None):
 
 def search_documents_in_graphdb(generated_cypher,parameters):
 
+    print("search_documents_in_graphdb START")
+
     if parameters is None:
         parameters = {}
 
@@ -70,4 +72,6 @@ def search_documents_in_graphdb(generated_cypher,parameters):
                         database_="neo4j"
         )
         json_output = _format_records_to_json(records, summary)
+        print("search_documents_in_graphdb END")
+
         return json_output

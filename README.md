@@ -1,7 +1,16 @@
 
-***Use Case VectorDB ( Qdrant ) query***
+Features:
 
-*1. Start and ingest VECTOR  database* 
+    1. Use a Langgraph graph
+
+    2. Call either Anthropic directly or AWS Bedrock
+
+    3. Call MCP tools at most 3 times 
+
+
+**USE CASE VectorDB 1/2 : query MCP tool VectorDB (Qdrant) and GraphDB (Neo) via AWS Bedrock ( maximum 3 MCP tool calls )-------------------------------------------------------------------------------- **
+
+*1.1 Start and ingest VECTOR  database* 
 
 docker run --name ai-agent-qdrant -p 6333:6333 -p 6334:6334 qdrant/qdrant
 
@@ -11,23 +20,7 @@ uv run python -m ingest.ingestVectorDB
 
 [ Check content via dashboard: http://localhost:6333/dashboard#/collections ]
 
-*2. Start MCP server*
-
-uv run python -m rag.mcpapi.mcpserver
-
-*3. Execute RAG*
-
-prerequisite: manually set same port number in client.py @  "url": "http://localhost:PORTNUMBER/mcp"
-
-uv run python -m rag.mainVectorDB
-
-RESULT:
-"""
-""""
-
-***Use Case Graph DB ( neo ) query***
-
-*1. Start and ingest GRAPH database*
+*1.2 Start and ingest GRAPH database*
 
 docker run \
     -p 7474:7474 -p 7687:7687 \
@@ -45,15 +38,42 @@ uv run python -m rag.ingest.ingestGraphDB
 
 *2. Start MCP server*
 
+uv run python -m mcpserver
+
+
+*3. Execute RAG*
+run ./scripts/start.sh  (   for AWS Bedrock usage set AWS_REGION & AWS_PROFILE
+                            for Claude usage set ANTHROPIC_API_KEY )
+
+prerequisite: manually set same port number in client.py @  "url": "http://localhost:PORTNUMBER/mcp"
+
+uv run python -m mainAwsBedrock
+
+Result:
+"""
+TODO
+"""
+
+
+**USE CASE Graph DB 2/2 : query MCP tool VectorDB (Qdrant) and GraphDB (Neo) direct via Anthropic ( maximum 3 MCP tool calls ) ----------------------------------------------------------------------------------- **
+
+1. Start VectorDB and GraphDB 
+see above
+
+
+*2. Start MCP server*
+
 uv run python -m rag.mcpapi.mcpserver
 
 
 *3. Retrieve AMD-related subset of ingested content*
 
-uv run python -m rag.retrieval.graphDBRetrieval
+run ./scripts/start.sh  (   for AWS Bedrock usage set AWS_REGION & AWS_PROFILE
+                            for Claude usage set ANTHROPIC_API_KEY )
+uv run python -m mainGraphDB
 
 
-RESULT:
+Result:
 """
 Hier sind die Informationen, die ich zu **AMD** in der Graphdatenbank gefunden habe:
 
