@@ -9,7 +9,7 @@ Features:
 
 **--------------------------------------------------------------------------------------------------------------------**
 
-USE CASE 1 : query MCP tool VectorDB (Qdrant) and GraphDB (Neo) via AWS Bedrock ( maximum 3 MCP tool calls ) 
+USE CASE 1 : via MCP query a VectorDB (Qdrant) and a GraphDB (Neo) ( maximum 3 MCP-Vector/Grapoh DB calls ), have AWS Bedrock generate answer. 
 
 **--------------------------------------------------------------------------------------------------------------------**
 
@@ -30,6 +30,7 @@ docker run \
     -p 7474:7474 -p 7687:7687 \
     -v /c/Daten/IT/DEV/Python/RAG_Research/data:/var/lib/neo4j/import \
     --name neo4j \
+    -e NEO4J_PLUGINS='["apoc"]' \
     -e NEO4J_AUTH=neo4j/password \
     neo4j:latest
 
@@ -60,7 +61,7 @@ TODO
 
 **--------------------------------------------------------------------------------------------------------------------**
 
-USE CASE 2 : query MCP tool VectorDB (Qdrant) and GraphDB (Neo) direct via Anthropic ( maximum 3 MCP tool calls )  
+USE CASE 2 :  via MCP query a VectorDB (Qdrant) and a GraphDB (Neo) ( maximum 3 MCP-Vector/Grapoh DB calls ),direct via Anthropic  
 
 **--------------------------------------------------------------------------------------------------------------------**
 
@@ -133,7 +134,7 @@ In modernen Enterprise-Architekturen nutzt man meist einen hybriden Ansatz:
 
 SANDBOX
 
-*ingest persons.csv document inot Neo graph db*
+*ingest persons.csv document into Neo graph db*
 
 copy from local PC into Docker container :
 
@@ -149,8 +150,14 @@ MERGE (c:Company {name: row.company_name, industry: row.company_industry})
 
 MERGE (p)-[:WORKS_AS {role: row.person_role}]->(c)
 
+*get schema
+CALL apoc.meta.data()
 
-( delete
+
+
+
+
+*delete whole content
 MATCH (n) DETACH DELETE n )
 
 *retrieval

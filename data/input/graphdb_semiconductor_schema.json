@@ -1,0 +1,282 @@
+[
+  {
+    "label": "HQ_IN",
+    "property": "Company",
+    "count": 160,
+    "unique": false,
+    "index": false,
+    "existence": false,
+    "type": "RELATIONSHIP",
+    "array": false,
+    "sample": null,
+    "left": 1,
+    "right": 0,
+    "other": [
+
+    ],
+    "otherLabels": [
+
+    ],
+    "elementType": "relationship"
+  },
+  {
+    "label": "MANUFACTURES",
+    "property": "Company",
+    "count": 160,
+    "unique": false,
+    "index": false,
+    "existence": false,
+    "type": "RELATIONSHIP",
+    "array": false,
+    "sample": null,
+    "left": 1,
+    "right": 0,
+    "other": [
+
+    ],
+    "otherLabels": [
+
+    ],
+    "elementType": "relationship"
+  },
+  {
+    "label": "DEPENDS_ON",
+    "property": "Company",
+    "count": 40,
+    "unique": false,
+    "index": false,
+    "existence": false,
+    "type": "RELATIONSHIP",
+    "array": false,
+    "sample": null,
+    "left": 1,
+    "right": 0,
+    "other": [
+
+    ],
+    "otherLabels": [
+
+    ],
+    "elementType": "relationship"
+  },
+  {
+    "label": "SUPPLIES",
+    "property": "Company",
+    "count": 16,
+    "unique": false,
+    "index": false,
+    "existence": false,
+    "type": "RELATIONSHIP",
+    "array": true,
+    "sample": null,
+    "left": 2,
+    "right": 0,
+    "other": [
+      "Company"
+    ],
+    "otherLabels": [
+
+    ],
+    "elementType": "relationship"
+  },
+  {
+    "label": "Company",
+    "property": "DEPENDS_ON",
+    "count": 40,
+    "unique": false,
+    "index": false,
+    "existence": false,
+    "type": "RELATIONSHIP",
+    "array": false,
+    "sample": null,
+    "left": 1,
+    "right": 0,
+    "other": [
+
+    ],
+    "otherLabels": [
+
+    ],
+    "elementType": "node"
+  },
+  {
+    "label": "Company",
+    "property": "HQ_IN",
+    "count": 160,
+    "unique": false,
+    "index": false,
+    "existence": false,
+    "type": "RELATIONSHIP",
+    "array": false,
+    "sample": null,
+    "left": 1,
+    "right": 0,
+    "other": [
+
+    ],
+    "otherLabels": [
+
+    ],
+    "elementType": "node"
+  },
+  {
+    "label": "Company",
+    "property": "MANUFACTURES",
+    "count": 160,
+    "unique": false,
+    "index": false,
+    "existence": false,
+    "type": "RELATIONSHIP",
+    "array": false,
+    "sample": null,
+    "left": 1,
+    "right": 0,
+    "other": [
+
+    ],
+    "otherLabels": [
+
+    ],
+    "elementType": "node"
+  },
+  {
+    "label": "Company",
+    "property": "product",
+    "count": 0,
+    "unique": false,
+    "index": false,
+    "existence": false,
+    "type": "STRING",
+    "array": false,
+    "sample": null,
+    "left": 0,
+    "right": 0,
+    "other": [
+
+    ],
+    "otherLabels": [
+
+    ],
+    "elementType": "node"
+  },
+  {
+    "label": "Company",
+    "property": "hq",
+    "count": 0,
+    "unique": false,
+    "index": false,
+    "existence": false,
+    "type": "STRING",
+    "array": false,
+    "sample": null,
+    "left": 0,
+    "right": 0,
+    "other": [
+
+    ],
+    "otherLabels": [
+
+    ],
+    "elementType": "node"
+  },
+  {
+    "label": "Company",
+    "property": "market_cap",
+    "count": 0,
+    "unique": false,
+    "index": false,
+    "existence": false,
+    "type": "STRING",
+    "array": false,
+    "sample": null,
+    "left": 0,
+    "right": 0,
+    "other": [
+
+    ],
+    "otherLabels": [
+
+    ],
+    "elementType": "node"
+  },
+  {
+    "label": "Company",
+    "property": "id",
+    "count": 0,
+    "unique": false,
+    "index": false,
+    "existence": false,
+    "type": "STRING",
+    "array": false,
+    "sample": null,
+    "left": 0,
+    "right": 0,
+    "other": [
+
+    ],
+    "otherLabels": [
+
+    ],
+    "elementType": "node"
+  },
+  {
+    "label": "Company",
+    "property": "name",
+    "count": 0,
+    "unique": false,
+    "index": false,
+    "existence": false,
+    "type": "STRING",
+    "array": false,
+    "sample": null,
+    "left": 0,
+    "right": 0,
+    "other": [
+
+    ],
+    "otherLabels": [
+
+    ],
+    "elementType": "node"
+  },
+  {
+    "label": "Company",
+    "property": "data_version",
+    "count": 0,
+    "unique": false,
+    "index": false,
+    "existence": false,
+    "type": "STRING",
+    "array": false,
+    "sample": null,
+    "left": 0,
+    "right": 0,
+    "other": [
+
+    ],
+    "otherLabels": [
+
+    ],
+    "elementType": "node"
+  },
+  {
+    "label": "Company",
+    "property": "SUPPLIES",
+    "count": 16,
+    "unique": false,
+    "index": false,
+    "existence": false,
+    "type": "RELATIONSHIP",
+    "array": true,
+    "sample": null,
+    "left": 2,
+    "right": 0,
+    "other": [
+      "Company"
+    ],
+    "otherLabels": [
+
+    ],
+    "elementType": "node"
+  }
+]

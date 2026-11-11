@@ -34,7 +34,21 @@ def search_in_graphdb(query: str) -> str:
     """Search the neo graph db for information relevant to the query."""
 
     # print(f"search_in_graphdb LLM delivered search string: {query}") # "AMD"
-    # TODO transform LLM query to NEO Graph query
+
+    # Text-to-Cypher Ansätze:
+    #
+    # 1. Der GraphRAG Ansatz (Fortgeschritten & Sicher)
+    # •  Schema auslesen: Das Framework zieht dynamisch die Struktur aus Neo4j (apoc.meta.schema()).
+    # •  Cypher-Generierung: Das LLM erzeugt die Query basierend auf dem dynamischen Schema.
+    # •  Validierung & Ausführung: Ein Abfang-Skript prüft die Query auf Syntaxfehler, bevor sie an Neo4j geschickt wird.
+    # •  Antwort-Synthese: Das LLM erhält die Rohdaten aus Neo4j und formuliert einen Satz für den Nutzer.
+    # ...
+
+    # 2. Der semantische Layer / Werkzeug-Ansatz (Robust für Produktion)
+    # In produktiven Systemen lässt man das LLM oft kein freies Cypher schreiben, da das Risiko von Fehlern oder unerwünschten Datenbank-Injektionen hoch ist. Stattdessen nutzt man einen semantischen Layer via Function Calling:
+    # • Vorgefertigte Funktionen: Entwickler schreiben sichere, parametrisierte Cypher-Abfragen (z. B. get_movies_by_actor(actor_name)).
+    # • LLM als Router: Das LLM entscheidet anhand der Nutzerfrage nur, welche Funktion aufgerufen werden muss und extrahiert die Argumente (z. B. actor_name = "Keanu Reeves").
+    # • Ausführung: Die Anwendung führt die sichere Funktion in Neo4j aus.
     generated_cypher_test = """    
             MATCH (amd {id: 'AMD_v2'})-[r]->(target) RETURN type(r) AS Beziehung, target.id AS Zielknoten UNION MATCH (amd {id: 'AMD_v3'})-[r]->(target) RETURN type(r) AS Beziehung, target.id AS Zielknoten UNION MATCH (amd {id: 'AMD_v4'})-[r]->(target) RETURN type(r) AS Beziehung, target.id AS Zielknoten UNION MATCH (amd {id: 'AMD_v5'})-[r]->(target) RETURN type(r) AS Beziehung, target.id AS Zielknoten UNION MATCH (amd {id: 'AMD_v6'})-[r]->(target) RETURN type(r) AS Beziehung, target.id AS Zielknoten UNION MATCH (amd {id: 'AMD_v7'})-[r]->(target) RETURN type(r) AS Beziehung, target.id AS Zielknoten UNION MATCH (amd {id: 'AMD_v8'})-[r]->(target) RETURN type(r) AS Beziehung, target.id AS Zielknoten UNION MATCH (amd {id: 'AMD_v9'})-[r]->(target) RETURN type(r) AS Beziehung, target.id AS Zielknoten
           """.strip()

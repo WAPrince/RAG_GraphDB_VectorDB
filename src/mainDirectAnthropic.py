@@ -14,6 +14,17 @@ from graph.state import AgentState
 from mcpapi.mcpClient import MCP_SERVERS
 
 
+
+
+def getNeoSchema():
+    graph = Neo4jGraph(
+        url=" http://localhost:7474/browser/",
+        username="neo4j",
+        password="password")
+
+
+
+
 async def run_agent(prompt: str) -> None:
 
     load_dotenv()

@@ -1,7 +1,8 @@
+fastmcp
 langchain_mcp_adapters
 langchain_aws
 langchain
-fastmcp
+langchain-community
 langgraph
 qdrant_client
 fastembed
