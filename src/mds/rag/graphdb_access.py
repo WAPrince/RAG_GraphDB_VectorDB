@@ -26,13 +26,11 @@ def _convert_record_element(element):
     elif isinstance(element, list):
         return [_convert_record_element(v) for v in element]
     else:
-        # Standarddatentypen (Strings, Zahlen, Booleans) direkt zurückgeben
         return element
 
 def _format_records_to_json(records, summary=None):
     """Überführt die Records-Liste in die finale JSON-Struktur."""
     formatted_records = []
-
     for record in records:
         # Ein Record verhält sich wie ein Dict oder eine Sequenz
         record_data = {
@@ -40,7 +38,6 @@ def _format_records_to_json(records, summary=None):
             "_fields": [_convert_record_element(val) for val in record.values()]
         }
         formatted_records.append(record_data)
-
     output = {"records": formatted_records}
 
     # Optional: Summary-Daten anhängen, falls vorhanden
@@ -53,18 +50,13 @@ def _format_records_to_json(records, summary=None):
             "result_available_after": summary.result_available_after,
             "result_consumed_after": summary.result_consumed_after
         }
-
     # In echten JSON-String umwandeln (formatiert mit Einrückung)
     return json.dumps(output, indent=2, ensure_ascii=False)
 
 
-def search_documents_in_graphdb(generated_cypher,parameters):
-
-    print("search_documents_in_graphdb START")
-
+def  neo_graph_search(generated_cypher,parameters):
     if parameters is None:
         parameters = {}
-
     with GraphDatabase.driver(URI, auth=AUTH) as driver:
         records, summary, _ = driver.execute_query(
                         query_=generated_cypher,
@@ -72,6 +64,4 @@ def search_documents_in_graphdb(generated_cypher,parameters):
                         database_="neo4j"
         )
         json_output = _format_records_to_json(records, summary)
-        print("search_documents_in_graphdb END")
-
         return json_output

@@ -1,7 +1,7 @@
 import asyncio, os
-from typing import Literal
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
+from langchain_community.graphs import Neo4jGraph
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain_mcp_adapters.tools import load_mcp_tools
 from langgraph.checkpoint.memory import InMemorySaver
@@ -10,10 +10,10 @@ from langgraph.graph import StateGraph
 from langgraph.prebuilt import ToolNode
 from mcp import ClientSession
 from mcp.client.streamable_http import streamablehttp_client
-from graph.state import AgentState
-from mcpapi.mcpClient import MCP_SERVERS
+from mds.graph.state import AgentState
+from mds.rag.mcp.mcpClient import MCP_SERVERS
 
-
+from typing import Literal
 
 
 def getNeoSchema():
@@ -23,9 +23,7 @@ def getNeoSchema():
         password="password")
 
 
-
-
-async def run_agent(prompt: str) -> None:
+async def run_agent(prompt: str, qdrant_collection:str) -> None:
 
     load_dotenv()
     print(f" ANTHROPIC_API_KEY: {os.getenv("ANTHROPIC_API_KEY")}")
@@ -40,9 +38,8 @@ async def run_agent(prompt: str) -> None:
                 model="claude-sonnet-4-6",
                 model_provider="anthropic"
             )
-
             client = MultiServerMCPClient(MCP_SERVERS)
-            async with client.session("knowledge") as session:
+            async with client.session(qdrant_collection) as session:
                 mcp_tools = await load_mcp_tools(session)
                 model_with_tools = model.bind_tools(mcp_tools)
 
@@ -89,7 +86,6 @@ async def run_agent(prompt: str) -> None:
                         "thread_id": "console-session-1"
                     }
                 }
-
                 result = await graph.ainvoke(
                     {
                         "messages": [
@@ -104,7 +100,8 @@ async def run_agent(prompt: str) -> None:
 
 async def main() -> None:
     await run_agent(
-        "Was kannst du zu AMD sagen? Gib deine Quellen an!")
+        "Was kannst du zu AMD sagen? Formuliere nicht mehr als 4 Antwortsätze aus den Rückgaben beider Quellen. Gib deine Quellen an!", qdrant_collection="semiconductor__dense_sparse")
+
 
 if __name__ == "__main__":
     asyncio.run(main())

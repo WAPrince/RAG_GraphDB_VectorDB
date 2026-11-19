@@ -1,10 +1,10 @@
-from pathlib import Path
 import json
 from neo4j import GraphDatabase
+import pathlib
+from pathlib import Path
 
-URI = "bolt://localhost:7687"
-AUTH = ("neo4j", "password")
-DATA_FILE = Path("C:/Daten/IT/DEV/Python/RAG_GraphDB_VectorDB/data/input/graphdb_semiconductor.txt")
+SEMICONDUCTOR_PATH = Path("../data/input/semiconductor/graph/")
+
 
 class Neo4jImporter:
     def __init__(self, uri, user, password):
@@ -56,5 +56,11 @@ class Neo4jImporter:
 if __name__ == "__main__":
 
     importer = Neo4jImporter("bolt://localhost:7687", "neo4j", "password")
-    importer._import_from_file(DATA_FILE)
+
+    input_folder = pathlib.Path(SEMICONDUCTOR_PATH)
+    for f in list(input_folder.iterdir()):
+        if f.name.endswith(".txt") == False:
+            continue
+        importer._import_from_file(f)
+
     importer._close()

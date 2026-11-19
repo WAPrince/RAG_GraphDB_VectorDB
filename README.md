@@ -1,18 +1,26 @@
 
 Features:
 
-    1. Use a Langgraph graph
+    1. Use Neo graph db and qdrant vector db
 
-    2. Call either Anthropic directly or AWS Bedrock
+    2. Apply a hybrid search onto Qdrant, merge Qdrant and Neo results, rerank both results 
 
-    3. Call MCP tools at most 3 times 
+    3  Use Langgraph 
+
+    4. Use LLM  Anthropic 
+
+    5. Call MCP tools at most 3 times 
 
 **--------------------------------------------------------------------------------------------------------------------**
 
-USE CASE 1 : via MCP query a VectorDB (Qdrant) and a GraphDB (Neo) ( maximum 3 MCP-Vector/Grapoh DB calls ), have AWS Bedrock generate answer. 
+USE CASE 1 : Based on the MCP tool result from VectorDB (Qdrant) and a GraphDB (Neo) Anthropic LLM creates an answer   
 
 **--------------------------------------------------------------------------------------------------------------------**
 
+<figure>
+  <img src="./data/results/Result_GraphDB_and_VectorDB.png" alt="LLM query processsing using GraphDB and Vector DB sources.">
+  <figcaption>LLM query processsing using GraphDB and Vector DB sources.</figcaption>
+</figure>
 
 *1.1 Start and ingest VECTOR  database* 
 
@@ -20,7 +28,7 @@ docker run --name ai-agent-qdrant -p 6333:6333 -p 6334:6334 qdrant/qdrant
 
 Add document to Qdrant  ( create Chunks, Embeddings ):
 
-uv run python -m ingest.ingestVectorDB
+uv run python -m qdrant_data_importer
 
 [ Check content via dashboard: http://localhost:6333/dashboard#/collections ]
 
@@ -36,43 +44,14 @@ docker run \
 
 UI: http://localhost:7474/browser/
 
-ingest graph-native document 'neo4j_semiconductor_graph' :
+ingest graph-native document 'graphdb_semiconductor.txt' :
 
-uv run python -m rag.ingest.ingestGraphDB
+uv run python -m neo_data_importer
 
 
 *2. Start MCP server*
 
-uv run python -m mcpserver
-
-
-*3. Execute RAG*
-run ./scripts/start.sh  (   for AWS Bedrock usage set AWS_REGION & AWS_PROFILE
-                            for Claude usage set ANTHROPIC_API_KEY )
-
-prerequisite: manually set same port number in client.py @  "url": "http://localhost:PORTNUMBER/mcp"
-
-uv run python -m mainAwsBedrock
-
-Result:
-"""
-TODO
-"""
-
-**--------------------------------------------------------------------------------------------------------------------**
-
-USE CASE 2 :  via MCP query a VectorDB (Qdrant) and a GraphDB (Neo) ( maximum 3 MCP-Vector/Grapoh DB calls ),direct via Anthropic  
-
-**--------------------------------------------------------------------------------------------------------------------**
-
-
-*1. Start VectorDB and GraphDB *
-see above
-*2.* 
-
-*2. Start MCP server*
-
-uv run python -m rag.mcpapi.mcpserver
+uv run python -mcp_server
 
 
 *3. Retrieve AMD-related subset of ingested content*
@@ -84,16 +63,23 @@ uv run python -m mainGraphDB
 
 Result:
 """
-Hier sind die Informationen, die ich zu **AMD** in der Graphdatenbank gefunden habe:
+### 🔴 AMD – Advanced Micro Devices
 
-🔴 AMD (Advanced Micro Devices)
+1. **AMD** hat sich vom klassischen Zweitbezieher zu einem der innovativsten Pioniere der Halbleiterindustrie entwickelt und prägt heute die Rechenleistung in PCs, Rechenzentren, Gaming-Konsolen und KI-Systemen.
 
-- 🏭 **Produkte:** AMD stellt **CPUs & KI-Beschleuniger** (AI Accelerators) her.
-- 🌍 **Hauptsitz:** Das Unternehmen hat seinen Sitz in den **USA**.
+2. Seit der Abspaltung der eigenen Fertigung im Jahr **2008** (aus der **GlobalFoundries** hervorging) setzt AMD auf das **Fabless-Modell** und lässt seine Chips von Auftragsfertigern wie **TSMC** produzieren.
+
+3. Mit der **Zen-Architektur** und den **Ryzen-Prozessoren** gelang AMD ein spektakuläres Comeback im CPU-Markt, und mit den **EPYC-Prozessoren** sowie **Radeon-Grafikkarten** ist das Unternehmen auch im Server- und Gaming-Segment stark vertreten.
+
+4. Durch die Übernahme von **Xilinx** und die Einführung der **Instinct MI300-Beschleuniger** positioniert sich AMD als ernsthafter Herausforderer von **Nvidia** im stark wachsenden Markt für generative KI – das Unternehmen hat seinen **Hauptsitz in den USA**.
 
 ---
 
-AMD ist ein bedeutender Halbleiterhersteller, der vor allem für seine Prozessoren (CPUs) und zunehmend auch für KI-Hardware bekannt ist. Möchtest du mehr über bestimmte Produkte oder Zusammenhänge von AMD erfahren?
+### 📚 Quellen:
+| Quelle | Typ |
+|---|---|
+| Vektordatenbank (Vector DB) | Semantische Textsuche – detaillierter Unternehmenstext zu AMD |
+| Graphdatenbank (Graph DB) | Strukturierte Relation: AMD → `HQ_IN` → **USA** |
 """
 
 
@@ -134,32 +120,6 @@ In modernen Enterprise-Architekturen nutzt man meist einen hybriden Ansatz:
 
 SANDBOX
 
-*ingest persons.csv document into Neo graph db*
-
-copy from local PC into Docker container :
-
-docker cp persons.csv neo4j:/var/lib/neo4j/import/persons.csv
-
-import csv via query in neo ui ( browser ):
-
-LOAD CSV WITH HEADERS FROM 'file:///persons.csv' AS row
-
-MERGE (p:Person {name: row.person_name})
-
-MERGE (c:Company {name: row.company_name, industry: row.company_industry})
-
-MERGE (p)-[:WORKS_AS {role: row.person_role}]->(c)
-
-*get schema
-CALL apoc.meta.data()
-
-
-
-
-
-*delete whole content
+*delete whole Neo content
 MATCH (n) DETACH DELETE n )
 
-*retrieval
-
-uv run python -m rag.retrieval.graphDBPersonRetrieval

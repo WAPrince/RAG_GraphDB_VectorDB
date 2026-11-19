@@ -2,7 +2,7 @@ from langchain_mcp_adapters.client import MultiServerMCPClient
 
 
 MCP_SERVERS = {
-    "knowledge": {
+    "semiconductor__dense_sparse": {
         "transport": "streamable-http",
         "url": "http://localhost:3005/mcp",
     }
