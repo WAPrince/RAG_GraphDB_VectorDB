@@ -11,7 +11,13 @@ Features:
 
     5. Call MCP tools at most 3 times 
 
-**--------------------------------------------------------------------------------------------------------------------**
+***PREREQUISITES***
+
+!!! Configure your .env file !!! => Use .env.example as template!
+
+=> ANTHROPIC_API_KEY, AWS_PROFILE ( if AWS Bedrock and Guardrails is used ) , LANGFUSE_SECRET_KEY and LANGFUSE_PUBLIC_KEY 
+
+
 
 USE CASE 1 : Based on the MCP tool result from VectorDB (Qdrant) and a GraphDB (Neo) Anthropic LLM creates an answer   
 

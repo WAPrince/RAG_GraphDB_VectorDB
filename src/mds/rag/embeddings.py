@@ -9,26 +9,37 @@ from typing_extensions import Any
 
 load_dotenv()
 
-#semantic search
+#semantic search ######################################################################################################
 # vector size 364
 #	• Einsatzgebiet: Der bewährte Spezialist für deutsche und mehrsprachige Dokumente mit Hybrid-Suche.
-#	• Spezifikationen: 568M Parameter, 8.192 Tokens Kontext. Es beherrscht gleichzeitig semantische Suche (Dense), klassische Keyword-Suche (Sparse) und Multi-Vector-Retrieval in einem Modell.
-BAAI_MODEL_NAME = os.getenv("BAAI_MODEL_NAME")#"BAAI/bge-small-en-v1.5"
+#	• Spezifikationen: 568M Parameter, 8.192 Tokens Kontext.
+#	  s beherrscht gleichzeitig semantische Suche (Dense), klassische Keyword-Suche (Sparse) und Multi-Vector-Retrieval in einem Modell.
+BAAI_MODEL_NAME = os.getenv("BAAI_MODEL_NAME") # "BAAI/bge-small-en-v1.5"
 
-MINILM_MODEL_NAME =os.getenv("MINILM_MODEL_NAME")
+# nur dense! separater Schritt für  sparse, z.Bsp mit BM25 !
+# vector size 384
+MINILM_MODEL_NAME =os.getenv("MINILM_MODEL_NAME") # "sentence-transformers/all-MiniLM-L6-v2"
+
 # vector size 1024
-HARRIER_MODEL_NAME = os.getenv("HARRIER_MODEL_NAME")#"microsoft/harrier-oss-v1-0.6b"
-# vector size ?
-QWEN_MODEL_NAME = os.getenv("QWEN_MODEL_NAME")#"Qwen/Qwen3-Embedding-8B"
+HARRIER_MODEL_NAME = os.getenv("HARRIER_MODEL_NAME") # "microsoft/harrier-oss-v1-0.6b"
+
+QWEN_MODEL_NAME = os.getenv("QWEN_MODEL_NAME") # "Qwen/Qwen3-Embedding-8B"
 
 SEMANTIC_SEARCH_EMBEDDING_MODEL = os.getenv("SEMANTIC_SEARCH_EMBEDDING_MODEL")
 
 
-#keyword search
-BM25_MODEL_NAME = os.getenv("BM25_MODEL_NAME")
+#keyword search #######################################################################################################
+BM25_MODEL_NAME = os.getenv("BM25_MODEL_NAME") # "Qdrant/bm25"
+SPLADE_MODEL_NAME  = os.getenv("SPLADE_MODEL_NAME") # naver/splade-cocondenser-ensembledistil
 
-#reranking
-RERANKER_MODEL_NAME = os.getenv("RERANKER_MODEL_NAME")
+
+#hybrid search ########################################################################################################
+#Dense-, Sparse- und Multi-Vector-Retrieval
+BAAIM3_MODEL_NAME = os.getenv("BAAIM3_MODEL_NAME") # "BAAI/bge-m3"
+
+
+#reranking ############################################################################################################
+RERANKER_MODEL_NAME = os.getenv("RERANKER_MODEL_NAME") #"BAAI/bge-reranker-v2-m3"
 
 
 

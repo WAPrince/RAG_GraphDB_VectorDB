@@ -1,4 +1,6 @@
 import asyncio
+from typing import Any
+
 from qdrant_client.models import ScoredPoint
 import uvicorn
 import inspect
@@ -12,13 +14,14 @@ from sentence_transformers import CrossEncoder
 import traceback
 
 
-reranker = CrossEncoder("BAAI/bge-reranker-v2-m3")
+reranker = CrossEncoder(RERANKER_MODEL_NAME)
 
 mcp = FastMCP()
 print(inspect.signature(FastMCP))
 print(inspect.signature(mcp.run))
 
 def _merge_and_rerank(query: str, list_a: list[dict], list_b: list[dict], top_k: int = 3) -> list[dict]:
+    """ merge results from vector and graph db search and rerank them """
 
     # 1. Qdrant-Ergebnisse sicher in Dictionaries umwandeln
     vector_docs = []
@@ -85,7 +88,7 @@ def _merge_and_rerank(query: str, list_a: list[dict], list_b: list[dict], top_k:
 def search_in_vectordb(query: str, limit: int = 3) -> str:
     """Search the qdrant vectordb ( knowledge base )  for information relevant to the query."""
     try:
-        documents = search_documents_in_vectordb(query, limit=limit)
+        documents = qdrant_vector_search(query, limit=limit)
     except Exception as e:
         print(f"Exception {e}")
     if not documents:
@@ -123,7 +126,7 @@ def search_in_graphdb(query: str) -> str:
           """.strip()
     parameters = {}
 
-    return search_documents_in_graphdb(generated_cypher=generated_cypher_test, parameters=parameters)
+    return neo_graph_search(generated_cypher=generated_cypher_test, parameters=parameters)
 
 
 @mcp.tool()
